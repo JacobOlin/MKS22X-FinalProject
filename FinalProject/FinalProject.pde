@@ -1,5 +1,7 @@
 Hero h;
 int coolDown;
+ArrayList<Walls> ListOfWalls;
+Walls w;
 
 void setup() {
   size(768,528);
@@ -7,10 +9,16 @@ void setup() {
   rectMode(CENTER);
   h = new Hero(48,48,width/2-24,height/2);
   coolDown = 0;
+  ListOfWalls = new ArrayList<Walls>();
+  //int a = (int)(random(11));
+  //for (int i = 0;i < a;i += 1) {
+  //  Wall 
+  w = new Walls(3,3);
 }
 
 void draw() {
   background(255);
+  w.display();
   if (coolDown > 0) {
     coolDown -= 1;
   }
@@ -52,5 +60,15 @@ public class Hero{
 }
 
 public class Walls{ 
+  int x,y;
   
+  Walls(int xCor,int yCor) {
+    x = xCor;
+    y = yCor;
+  }
+  
+  void display() {
+    fill(0,0,255);
+    rect(48*x+24,48*y+24,48,48);
+  }
 }
