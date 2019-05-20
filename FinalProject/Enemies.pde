@@ -12,11 +12,29 @@ public abstract class Enemies implements Fightable{
   }
 }
 
-public class Ocotorok extends Enemies{
+public class Tektite extends Enemies{
  int x;
  int y;
  
- public Octorok(int xpos, int ypos){
+ public Tektite(int xpos, int ypos){
+   x = xpos;
+   y=ypos;
+   hp = 3;
+   damage = 1;
+ }
+ 
+ public void move(){
+ }
+ 
+ public void attack(int damage){
+ }
+ 
+ public void takeDamage(int damage){
+   hp -= damage;
+ }
+
+
+ public Tektite(int xpos, int ypos){
    x = xpos;
    y=ypos;
    hp = 3;
@@ -33,4 +51,6 @@ public class Ocotorok extends Enemies{
    hp -= damage;
  }
 }
+  
+ 
    
