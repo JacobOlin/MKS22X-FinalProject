@@ -8,6 +8,12 @@ void setup() {
 }
 
 void draw() {
+  background(255);
+  if (keyPressed) {
+    if (key == 'W' || key == 'w') {
+      h.y -= 1;
+    }
+  }
   h.display();
 }
 
