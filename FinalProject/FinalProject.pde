@@ -13,6 +13,15 @@ void draw() {
     if (key == 'W' || key == 'w') {
       h.y -= 1;
     }
+    if (key == 'A' || key == 'a') {
+      h.x -= 1;
+    }
+    if (key == 'S' || key == 's') {
+      h.y += 1;
+    }
+    if (key == 'D' || key == 'd') {
+      h.x += 1;
+    }
   }
   h.display();
 }
