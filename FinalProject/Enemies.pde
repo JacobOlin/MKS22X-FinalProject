@@ -56,6 +56,28 @@ public class Peahat extends Enemies{
  }
 }
 
+public class Aquamentus extends Enemies{
+ int x;
+ int y;
+ 
+ public Aquamentus(int xpos, int ypos){
+   x = xpos;
+   y=ypos;
+   hp = 10;
+   damage = 2;
+ }
+ 
+ public void move(){
+ }
+ 
+ public void attack(int damage){
+ }
+ 
+ public void takeDamage(int damage){
+   hp -= damage;
+ }
+}
+
   
  
    
