@@ -10,17 +10,17 @@ void setup() {
 void draw() {
   background(255);
   if (keyPressed) {
-    if (key == 'W' || key == 'w') {
-      h.y -= 1;
+    if ((key == 'W' || key == 'w') && h.y - h.h/2 > 0) {
+      h.y -= 2.5;
     }
-    if (key == 'A' || key == 'a') {
-      h.x -= 1;
+    if ((key == 'A' || key == 'a') && h.x - h.w/2 > 0) {
+      h.x -= 2.5;
     }
-    if (key == 'S' || key == 's') {
-      h.y += 1;
+    if ((key == 'S' || key == 's') && h.y + h.h/2 < width) {
+      h.y += 2.5;
     }
-    if (key == 'D' || key == 'd') {
-      h.x += 1;
+    if ((key == 'D' || key == 'd') && h.x + h.w/2 < height) {
+      h.x += 2.5;
     }
   }
   h.display();
