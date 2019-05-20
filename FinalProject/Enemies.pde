@@ -32,9 +32,13 @@ public class Tektite extends Enemies{
  public void takeDamage(int damage){
    hp -= damage;
  }
+}
 
-
- public Tektite(int xpos, int ypos){
+public class Peahat extends Enemies{
+ int x;
+ int y;
+ 
+ public PeaHat(int xpos, int ypos){
    x = xpos;
    y=ypos;
    hp = 3;
@@ -51,6 +55,7 @@ public class Tektite extends Enemies{
    hp -= damage;
  }
 }
+
   
  
    
