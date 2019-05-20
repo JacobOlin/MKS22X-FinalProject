@@ -1,26 +1,35 @@
 Hero h;
+int coolDown;
 
 void setup() {
-  size(768,432);
+  size(768,528);
   background(255);
   rectMode(CENTER);
   h = new Hero(48,48,width/2-24,height/2);
+  coolDown = 0;
 }
 
 void draw() {
   background(255);
-  if (keyPressed) {
+  if (coolDown > 0) {
+    coolDown -= 1;
+  }
+  if (keyPressed && coolDown == 0) {
     if ((key == 'W' || key == 'w') && h.y - h.Imgh/2 > 0) {
       h.y -= 48;
+      coolDown = 10;
     }
     if ((key == 'A' || key == 'a') && h.x - h.Imgw/2 > 0) {
       h.x -= 48;
+      coolDown = 10;
     }
     if ((key == 'S' || key == 's') && h.y + h.Imgh/2 < height) {
       h.y += 48;
+      coolDown = 10;
     }
     if ((key == 'D' || key == 'd') && h.x + h.Imgw/2 < width) {
       h.x += 48;
+      coolDown = 10;
     }
   }
   h.display();
