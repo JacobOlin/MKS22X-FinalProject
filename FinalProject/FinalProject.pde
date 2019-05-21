@@ -14,6 +14,7 @@ void setup() {
   //for (int i = 0;i < a;i += 1) {
   //  Wall 
   w = new Walls(3,3);
+  ListOfWalls.add(w);
 }
 
 void draw() {
@@ -22,26 +23,63 @@ void draw() {
   if (coolDown > 0) {
     coolDown -= 1;
   }
-  if (keyPressed && coolDown == 0) {
-    if ((key == 'W' || key == 'w') && h.y - h.Imgh/2 > 0) {
-      h.y -= 48;
-      coolDown = 10;
-    }
-    if ((key == 'A' || key == 'a') && h.x - h.Imgw/2 > 0) {
-      h.x -= 48;
-      coolDown = 10;
-    }
-    if ((key == 'S' || key == 's') && h.y + h.Imgh/2 < height) {
-      h.y += 48;
-      coolDown = 10;
-    }
-    if ((key == 'D' || key == 'd') && h.x + h.Imgw/2 < width) {
-      h.x += 48;
-      coolDown = 10;
-    }
-  }
+  move();
   h.display();
 }
+
+void move() {
+  if (keyPressed && coolDown == 0) {
+    if ((key == 'W' || key == 'w') && h.y - h.Imgh/2 > 0) {
+      boolean canMove = true;
+      for (Walls w : ListOfWalls) {
+        if (h.x/48 == w.x && h.y/48 - 1 == w.y) {
+          canMove = false;
+        }
+      }
+      if (canMove) {
+        h.y -= 48;
+        coolDown = 10;
+      }
+    }
+    if ((key == 'A' || key == 'a') && h.x - h.Imgw/2 > 0) {
+      boolean canMove = true;
+      for (Walls w : ListOfWalls) {
+        if (h.x/48 - 1 == w.x && h.y/48 == w.y) {
+          canMove = false;
+        }
+      }
+      if (canMove) {
+        h.x -= 48;
+        coolDown = 10;
+      }
+    }
+    if ((key == 'S' || key == 's') && h.y + h.Imgh/2 < height) {
+      boolean canMove = true;
+      for (Walls w : ListOfWalls) {
+        if (h.x/48 == w.x && h.y/48 + 1 == w.y) {
+          canMove = false;
+        }
+      }
+      if (canMove) {
+        h.y += 48;
+        coolDown = 10;
+      }
+    }
+    if ((key == 'D' || key == 'd') && h.x + h.Imgw/2 < width) {
+      boolean canMove = true;
+      for (Walls w : ListOfWalls) {
+        if (h.x/48 + 1 == w.x && h.y/48== w.y) {
+          canMove = false;
+        }
+      }
+      if (canMove) {
+        h.x += 48;
+        coolDown = 10;
+      }
+    }
+  }
+}  
+
 
 public class Hero{
   int Imgh,Imgw,x,y;
