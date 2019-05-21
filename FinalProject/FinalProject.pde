@@ -58,8 +58,24 @@ public class Hero implements Fightable{
   void attack() {
     if(keyPressed && coolDown == 0) {
       if (key == 'x' || key == 'X') {
-        background(255,0,0);
-        coolDown = 10;
+        //background(255,0,0);
+        //coolDown = 10;
+        if (direction == 'u') {
+          fill(255,0,0);
+          rect(x,y-48,48,48);
+        }
+        if (direction == 'l') {
+          fill(255,0,0);
+          rect(x-48,y,48,48);
+        }
+        if (direction == 'd') {
+          fill(255,0,0);
+          rect(x,y+48,48,48);
+        }
+        if (direction == 'r') {
+          fill(255,0,0);
+          rect(x+48,y,48,48);
+        }
       }
     }
   }
