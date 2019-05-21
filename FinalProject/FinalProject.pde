@@ -1,7 +1,7 @@
 Hero h;
 int coolDown;
-ArrayList<Walls> ListOfWalls;
-Walls w;
+ArrayList<Wall> ListOfWalls;
+Wall w;
 
 void setup() {
   size(768,528);
@@ -9,11 +9,11 @@ void setup() {
   rectMode(CENTER);
   h = new Hero(48,48,width/2-24,height/2);
   coolDown = 0;
-  ListOfWalls = new ArrayList<Walls>();
+  ListOfWalls = new ArrayList<Wall>();
   //int a = (int)(random(11));
   //for (int i = 0;i < a;i += 1) {
   //  Wall 
-  w = new Walls(3,3);
+  w = new Wall(3,3);
   ListOfWalls.add(w);
 }
 
@@ -31,7 +31,7 @@ void move() {
   if (keyPressed && coolDown == 0) {
     if ((key == 'W' || key == 'w') && h.y - h.Imgh/2 > 0) {
       boolean canMove = true;
-      for (Walls w : ListOfWalls) {
+      for (Wall w : ListOfWalls) {
         if (h.x/48 == w.x && h.y/48 - 1 == w.y) {
           canMove = false;
         }
@@ -43,7 +43,7 @@ void move() {
     }
     if ((key == 'A' || key == 'a') && h.x - h.Imgw/2 > 0) {
       boolean canMove = true;
-      for (Walls w : ListOfWalls) {
+      for (Wall w : ListOfWalls) {
         if (h.x/48 - 1 == w.x && h.y/48 == w.y) {
           canMove = false;
         }
@@ -55,7 +55,7 @@ void move() {
     }
     if ((key == 'S' || key == 's') && h.y + h.Imgh/2 < height) {
       boolean canMove = true;
-      for (Walls w : ListOfWalls) {
+      for (Wall w : ListOfWalls) {
         if (h.x/48 == w.x && h.y/48 + 1 == w.y) {
           canMove = false;
         }
@@ -67,7 +67,7 @@ void move() {
     }
     if ((key == 'D' || key == 'd') && h.x + h.Imgw/2 < width) {
       boolean canMove = true;
-      for (Walls w : ListOfWalls) {
+      for (Wall w : ListOfWalls) {
         if (h.x/48 + 1 == w.x && h.y/48== w.y) {
           canMove = false;
         }
@@ -97,10 +97,14 @@ public class Hero{
   
 }
 
-public class Walls{ 
+public interface Fightable{
+  
+}
+
+public class Wall{ 
   int x,y;
   
-  Walls(int xCor,int yCor) {
+  Wall(int xCor,int yCor) {
     x = xCor;
     y = yCor;
   }
