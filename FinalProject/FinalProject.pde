@@ -32,6 +32,7 @@ void draw() {
 
 public class Hero implements Fightable{
   int Imgh,Imgw,x,y,hp,dmg;
+  char direction;
   Hero(int he,int wi,int startx,int starty) {
     Imgh = he;
     Imgw = wi;
@@ -39,6 +40,7 @@ public class Hero implements Fightable{
     y = starty;
     hp = 100;
     dmg = 10;
+    direction = 'd';
   }
   
   void display() {
@@ -62,9 +64,11 @@ public class Hero implements Fightable{
     }
   }
   
+  
   void move() {
   if (keyPressed && coolDown == 0) {
     if ((key == 'W' || key == 'w') && y - Imgh/2 > 0) {
+      direction = 'u';
       boolean canMove = true;
       for (Wall w : ListOfWalls) {
         if (x/48 == w.x && y/48 - 1 == w.y) {
@@ -77,6 +81,7 @@ public class Hero implements Fightable{
       }
     }
     if ((key == 'A' || key == 'a') && x - Imgw/2 > 0) {
+      direction = 'l';
       boolean canMove = true;
       for (Wall w : ListOfWalls) {
         if (x/48 - 1 == w.x && y/48 == w.y) {
@@ -89,6 +94,7 @@ public class Hero implements Fightable{
       }
     }
     if ((key == 'S' || key == 's') && y + Imgh/2 < height) {
+      direction  = 'd';
       boolean canMove = true;
       for (Wall w : ListOfWalls) {
         if (x/48 == w.x && y/48 + 1 == w.y) {
@@ -101,6 +107,7 @@ public class Hero implements Fightable{
       }
     }
     if ((key == 'D' || key == 'd') && x + Imgw/2 < width) {
+      direction = 'r';
       boolean canMove = true;
       for (Wall w : ListOfWalls) {
         if (x/48 + 1 == w.x && y/48== w.y) {
