@@ -24,18 +24,21 @@ void draw() {
     coolDown -= 1;
   }
   h.move();
+  h.attack();
   h.display();
 }
 
 
 
 public class Hero implements Fightable{
-  int Imgh,Imgw,x,y;
+  int Imgh,Imgw,x,y,hp,dmg;
   Hero(int he,int wi,int startx,int starty) {
     Imgh = he;
     Imgw = wi;
     x = startx;
     y = starty;
+    hp = 100;
+    dmg = 10;
   }
   
   void display() {
@@ -43,12 +46,20 @@ public class Hero implements Fightable{
     rect(x,y,Imgh,Imgw);
   }
   
-  void takeDmg() {
-   
+  void takeDmg(int amount) {
+    hp -= amount;
+    if (hp < 0) {
+      hp = 0;
+    }
   }
   
   void attack() {
-    
+    if(keyPressed && coolDown == 0) {
+      if (key == 'x' || key == 'X') {
+        background(255,0,0);
+        coolDown = 10;
+      }
+    }
   }
   
   void move() {
@@ -108,7 +119,7 @@ public class Hero implements Fightable{
 }
 
 public interface Fightable{
-  void takeDmg();
+  void takeDmg(int amount);
   void attack();
   void move();
 }
