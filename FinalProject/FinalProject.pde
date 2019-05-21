@@ -23,65 +23,13 @@ void draw() {
   if (coolDown > 0) {
     coolDown -= 1;
   }
-  move();
+  h.move();
   h.display();
 }
 
-void move() {
-  if (keyPressed && coolDown == 0) {
-    if ((key == 'W' || key == 'w') && h.y - h.Imgh/2 > 0) {
-      boolean canMove = true;
-      for (Wall w : ListOfWalls) {
-        if (h.x/48 == w.x && h.y/48 - 1 == w.y) {
-          canMove = false;
-        }
-      }
-      if (canMove) {
-        h.y -= 48;
-        coolDown = 10;
-      }
-    }
-    if ((key == 'A' || key == 'a') && h.x - h.Imgw/2 > 0) {
-      boolean canMove = true;
-      for (Wall w : ListOfWalls) {
-        if (h.x/48 - 1 == w.x && h.y/48 == w.y) {
-          canMove = false;
-        }
-      }
-      if (canMove) {
-        h.x -= 48;
-        coolDown = 10;
-      }
-    }
-    if ((key == 'S' || key == 's') && h.y + h.Imgh/2 < height) {
-      boolean canMove = true;
-      for (Wall w : ListOfWalls) {
-        if (h.x/48 == w.x && h.y/48 + 1 == w.y) {
-          canMove = false;
-        }
-      }
-      if (canMove) {
-        h.y += 48;
-        coolDown = 10;
-      }
-    }
-    if ((key == 'D' || key == 'd') && h.x + h.Imgw/2 < width) {
-      boolean canMove = true;
-      for (Wall w : ListOfWalls) {
-        if (h.x/48 + 1 == w.x && h.y/48== w.y) {
-          canMove = false;
-        }
-      }
-      if (canMove) {
-        h.x += 48;
-        coolDown = 10;
-      }
-    }
-  }
-}  
 
 
-public class Hero{
+public class Hero implements Fightable{
   int Imgh,Imgw,x,y;
   Hero(int he,int wi,int startx,int starty) {
     Imgh = he;
@@ -95,10 +43,74 @@ public class Hero{
     rect(x,y,Imgh,Imgw);
   }
   
+  void takeDmg() {
+   
+  }
+  
+  void attack() {
+    
+  }
+  
+  void move() {
+  if (keyPressed && coolDown == 0) {
+    if ((key == 'W' || key == 'w') && y - Imgh/2 > 0) {
+      boolean canMove = true;
+      for (Wall w : ListOfWalls) {
+        if (x/48 == w.x && y/48 - 1 == w.y) {
+          canMove = false;
+        }
+      }
+      if (canMove) {
+        y -= 48;
+        coolDown = 10;
+      }
+    }
+    if ((key == 'A' || key == 'a') && x - Imgw/2 > 0) {
+      boolean canMove = true;
+      for (Wall w : ListOfWalls) {
+        if (x/48 - 1 == w.x && y/48 == w.y) {
+          canMove = false;
+        }
+      }
+      if (canMove) {
+        x -= 48;
+        coolDown = 10;
+      }
+    }
+    if ((key == 'S' || key == 's') && y + Imgh/2 < height) {
+      boolean canMove = true;
+      for (Wall w : ListOfWalls) {
+        if (x/48 == w.x && y/48 + 1 == w.y) {
+          canMove = false;
+        }
+      }
+      if (canMove) {
+        y += 48;
+        coolDown = 10;
+      }
+    }
+    if ((key == 'D' || key == 'd') && x + Imgw/2 < width) {
+      boolean canMove = true;
+      for (Wall w : ListOfWalls) {
+        if (x/48 + 1 == w.x && y/48== w.y) {
+          canMove = false;
+        }
+      }
+      if (canMove) {
+        x += 48;
+        coolDown = 10;
+      }
+    }   
+  }
+}  
+
+  
 }
 
 public interface Fightable{
-  
+  void takeDmg();
+  void attack();
+  void move();
 }
 
 public class Wall{ 
