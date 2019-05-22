@@ -24,8 +24,13 @@ void setup() {
       ListOfRooms.get(i).add(new ArrayList<Wall>());
     }
   }
-  ListOfRooms.get(1).get(1).add(new Wall(5,5));
-  ListOfRooms.get(0).get(1).add(new Wall(0,0));
+  for (int i = 0;i < ListOfRooms.size();i += 1) {
+    for (int j = 0;j < ListOfRooms.get(i).size();j += 1) {
+      ListOfRooms.get(i).get(j).add(new Wall(j,i));
+      //ListOfRooms.get(i).get(j).add(new Wall(7,0));
+    }
+  }
+
   //w = new Wall(3,3);
   //ListOfWalls.add(w);
 }
