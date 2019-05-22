@@ -114,17 +114,9 @@ public class Hero implements Fightable{
     }
     if ((key == 'W' || key == 'w') && y - Imgh/2 == 0) {
       direction = 'u';
-      boolean canMove = true;
-      for (Wall w : ListOfWalls) {
-        if (x/48 == w.x && y/48 - 1 == w.y) {
-          canMove = false;
-        }
-      }
-      if (canMove) {
-        roomY -= 1;
-        y += (height/48) - 1;
-        coolDown = 10;
-      }
+      roomY -= 1;
+      y = height - 24;
+      coolDown = 10;
     }
     if ((key == 'A' || key == 'a') && x - Imgw/2 > 0) {
       direction = 'l';
@@ -139,6 +131,12 @@ public class Hero implements Fightable{
         coolDown = 10;
       }
     }
+    if ((key == 'A' || key == 'a') && x - Imgw/2 == 0) {
+      direction = 'l';
+      roomX -= 1;
+      x = width - 24;
+      coolDown = 10;
+    }
     if ((key == 'S' || key == 's') && y + Imgh/2 < height) {
       direction  = 'd';
       boolean canMove = true;
@@ -152,6 +150,12 @@ public class Hero implements Fightable{
         coolDown = 10;
       }
     }
+    if ((key == 'S' || key == 's') && y + Imgh/2 == height) {
+      direction = 'd';
+      roomY += 1;
+      y = 24;
+      coolDown = 10;
+    }
     if ((key == 'D' || key == 'd') && x + Imgw/2 < width) {
       direction = 'r';
       boolean canMove = true;
@@ -164,7 +168,13 @@ public class Hero implements Fightable{
         x += 48;
         coolDown = 10;
       }
-    }   
+    }
+    if ((key == 'D' || key == 'd') && x + Imgh/2 == width) {
+      direction = 'r';
+      roomX += 1;
+      x = 24;
+      coolDown = 10;
+    }
   }
 }  
 
