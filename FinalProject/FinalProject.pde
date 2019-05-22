@@ -2,6 +2,10 @@ Hero h;
 int coolDown;
 ArrayList<Wall> ListOfWalls;
 Wall w;
+int roomX = 1;
+int roomY = 1;
+ArrayList<ArrayList<ArrayList<Wall>>> ListOfRooms;
+
 
 void setup() {
   size(768,528);
@@ -13,13 +17,25 @@ void setup() {
   //int a = (int)(random(11));
   //for (int i = 0;i < a;i += 1) {
   //  Wall 
-  w = new Wall(3,3);
-  ListOfWalls.add(w);
+  ListOfRooms = new ArrayList<ArrayList<ArrayList<Wall>>>();
+  for (int i = 0;i < 3;i += 1) {
+    ListOfRooms.add(new ArrayList<ArrayList<Wall>>());
+    for (int j = 0;j < 3;j += 1) {
+      ListOfRooms.get(i).add(new ArrayList<Wall>());
+    }
+  }
+  ListOfRooms.get(1).get(1).add(new Wall(5,5));
+  ListOfRooms.get(0).get(1).add(new Wall(0,0));
+  //w = new Wall(3,3);
+  //ListOfWalls.add(w);
 }
 
 void draw() {
+  ListOfWalls = ListOfRooms.get(roomY).get(roomX);
   background(255);
-  w.display();
+  for (Wall w : ListOfWalls) {
+    w.display();
+  }
   if (coolDown > 0) {
     coolDown -= 1;
   }
@@ -93,6 +109,20 @@ public class Hero implements Fightable{
       }
       if (canMove) {
         y -= 48;
+        coolDown = 10;
+      }
+    }
+    if ((key == 'W' || key == 'w') && y - Imgh/2 == 0) {
+      direction = 'u';
+      boolean canMove = true;
+      for (Wall w : ListOfWalls) {
+        if (x/48 == w.x && y/48 - 1 == w.y) {
+          canMove = false;
+        }
+      }
+      if (canMove) {
+        roomY -= 1;
+        y += (height/48) - 1;
         coolDown = 10;
       }
     }
