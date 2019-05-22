@@ -1,6 +1,7 @@
 public Interface Fightable{
   int hp;
   int damamge;
+  int size;
   
   public void takeDamage(int damage){
   }

@@ -1,6 +1,7 @@
 public abstract class Enemies implements Fightable{
   int hp;
   int damage;
+  int size;
   
   public abstract void move(){
   }
@@ -10,6 +11,7 @@ public abstract class Enemies implements Fightable{
   
   public abstract void attack( int damage){
   }
+  
 }
 
 public class Tektite extends Enemies{
@@ -77,6 +79,18 @@ public class Aquamentus extends Enemies{
    hp -= damage;
  }
 }
+
+public class Fireball{
+  int damage;
+  
+  public void collide(Fightable Other){
+    if(dist(this.x, this.y, other.x, other.y) <= (other.size + this.size) / 2){
+      Other.takeDamage(damage);
+    }
+  }
+}
+
+
 
   
  
