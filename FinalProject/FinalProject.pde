@@ -38,6 +38,8 @@ void setup() {
 void draw() {
   ListOfWalls = ListOfRooms.get(roomY).get(roomX);
   background(255);
+  fill(255,0,0);
+  rect(72,72,144,144);
   for (Wall w : ListOfWalls) {
     w.display();
   }
