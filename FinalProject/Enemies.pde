@@ -82,12 +82,31 @@ public class Aquamentus extends Enemies{
 
 public class Fireball{
   int damage;
+  int x;
+  int y;
+  int xspeed;
+  int yspeed;
   
   public void collide(Fightable Other){
     if(dist(this.x, this.y, other.x, other.y) <= (other.size + this.size) / 2){
-      Other.takeDamage(damage);
+      Other.takeDamage(damage);  
     }
   }
+  
+  public void move(){
+    x += xspeed;
+    y += yspeed;
+  }
+  
+  public Fireball(int damage,int x, int y, int, int xspeed, int yspeed){
+    this.damage = damage;
+    this.x = x;
+    this.y =y;
+    this.xpseed = xpseed;
+    this.yspeed = yspeed;
+  }
+  
+  
 }
 
 
