@@ -45,6 +45,8 @@ void draw() {
   }
   if (coolDown > 0) {
     coolDown -= 1;
+    h.x += h.slowMoveX;
+    h.y += h.slowMoveY;
   }
   h.move();
   h.attack();
@@ -54,7 +56,7 @@ void draw() {
 
 
 public class Hero implements Fightable{
-  int Imgh,Imgw,x,y,hp,dmg;
+  int Imgh,Imgw,x,y,hp,dmg,slowMoveX,slowMoveY;
   char direction;
   Hero(int he,int wi,int startx,int starty) {
     Imgh = he;
@@ -115,15 +117,19 @@ public class Hero implements Fightable{
         }
       }
       if (canMove) {
-        y -= 48;
-        coolDown = 10;
+        //y -= 48;
+        slowMoveX = 0;
+        slowMoveY = -6;
+        coolDown = 8;
       }
     }
     if ((key == 'W' || key == 'w') && y - Imgh/2 == 0) {
       direction = 'u';
       roomY -= 1;
       y = height - 24;
-      coolDown = 10;
+      coolDown = 8;
+      slowMoveX = 0;
+      slowMoveY = 0;
     }
     if ((key == 'A' || key == 'a') && x - Imgw/2 > 0) {
       direction = 'l';
@@ -134,15 +140,19 @@ public class Hero implements Fightable{
         }
       }
       if (canMove) {
-        x -= 48;
-        coolDown = 10;
+        //x -= 48;
+        slowMoveX = -6;
+        slowMoveY = 0;        
+        coolDown = 8;
       }
     }
     if ((key == 'A' || key == 'a') && x - Imgw/2 == 0) {
       direction = 'l';
       roomX -= 1;
       x = width - 24;
-      coolDown = 10;
+      coolDown = 8;
+      slowMoveX = 0;
+      slowMoveY = 0;
     }
     if ((key == 'S' || key == 's') && y + Imgh/2 < height) {
       direction  = 'd';
@@ -153,15 +163,19 @@ public class Hero implements Fightable{
         }
       }
       if (canMove) {
-        y += 48;
-        coolDown = 10;
+        //y += 48;
+        slowMoveX = 0;
+        slowMoveY = 6;
+        coolDown = 8;
       }
     }
     if ((key == 'S' || key == 's') && y + Imgh/2 == height) {
       direction = 'd';
       roomY += 1;
       y = 24;
-      coolDown = 10;
+      coolDown = 8;
+      slowMoveX = 0;
+      slowMoveY = 0;
     }
     if ((key == 'D' || key == 'd') && x + Imgw/2 < width) {
       direction = 'r';
@@ -172,15 +186,19 @@ public class Hero implements Fightable{
         }
       }
       if (canMove) {
-        x += 48;
-        coolDown = 10;
+        //x += 48;
+        slowMoveX = 6;
+        slowMoveY = 0;
+        coolDown = 8;
       }
     }
     if ((key == 'D' || key == 'd') && x + Imgh/2 == width) {
       direction = 'r';
       roomX += 1;
       x = 24;
-      coolDown = 10;
+      coolDown = 8;
+      slowMoveX = 0;
+      slowMoveY = 0;
     }
   }
 }  
