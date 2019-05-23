@@ -4,22 +4,30 @@ public abstract class Enemies implements Fightable {
   int size;
   int x;
   int y;
+  int w;
+  int h;
 
-  public abstract void move() {
-  }
+  public abstract void move();
+  
 
-  public abstract void takeDamage(int damage) {
-  }
+  public abstract void takeDamage(int damage);
+  
 
-  public abstract void attack( int damage) {
+  public abstract void attack( int damage);
+
+  public void display() {
+    fill(255, 0, 255);
+    rect(x, y, h, w);
   }
 }
 
 public class Tektite extends Enemies {
 
-  public Tektite(int xpos, int ypos) {
+  public Tektite(int xpos, int ypos, int w, int h) {
     x = xpos;
     y=ypos;
+    this.w = w;
+    this.h = h;
     hp = 3;
     damage = 1;
   }
@@ -35,9 +43,9 @@ public class Tektite extends Enemies {
   }
 }
 
-public class Peahat extends Enemies {
+public class peahat extends Enemies {
 
-  public PeaHat(int xpos, int ypos) {
+  public peahat(int xpos, int ypos) {
     x = xpos;
     y=ypos;
     hp = 3;
@@ -81,10 +89,11 @@ public class Fireball {
   int y;
   int xspeed;
   int yspeed;
+  int size;
 
-  public void collide(Fightable Other) {
+  public void collide(Enemies other) {
     if (dist(this.x, this.y, other.x, other.y) <= (other.size + this.size) / 2) {
-      Other.takeDamage(damage);
+      other.takeDamage(damage);
     }
   }
 
@@ -93,11 +102,11 @@ public class Fireball {
     y += yspeed;
   }
 
-  public Fireball(int damage, int x, int y, int, int xspeed, int yspeed) {
+  public Fireball(int damage, int x, int y, int xspeed, int yspeed) {
     this.damage = damage;
     this.x = x;
     this.y =y;
-    this.xpseed = xpseed;
+    this.xspeed = xspeed;
     this.yspeed = yspeed;
   }
 }

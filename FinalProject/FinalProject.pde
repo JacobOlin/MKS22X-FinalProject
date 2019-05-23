@@ -1,10 +1,12 @@
 Hero h;
+Tektite t;
 
 void setup() {
   size(600,600);
   background(255);
   rectMode(CENTER);
   h = new Hero(20,20,height/2,width/2);
+  t = new Tektite(15,15, height/2, width/2);
 }
 
 void draw() {
@@ -24,6 +26,9 @@ void draw() {
     }
   }
   h.display();
+  t.display();
+  
+  
 }
 
 public class Hero{

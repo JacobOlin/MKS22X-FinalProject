@@ -1,13 +1,10 @@
-public Interface Fightable{
-  int hp;
-  int damamge;
-  int size;
+interface Fightable{
   
-  public void takeDamage(int damage){
-  }
+  void takeDamage(int damage);
   
-  public void attack(int damage){
-  }
+  void attack(int damage);
   
-  public void move()
+  void move();
+  
+  
 }
