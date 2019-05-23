@@ -26,8 +26,28 @@ void setup() {
   }
   for (int i = 0;i < ListOfRooms.size();i += 1) {
     for (int j = 0;j < ListOfRooms.get(i).size();j += 1) {
-      ListOfRooms.get(i).get(j).add(new Wall(j,i));
+      //ListOfRooms.get(i).get(j).add(new Wall(j,i));
       //ListOfRooms.get(i).get(j).add(new Wall(7,0));
+      if (i == 0) {
+        for (int k = 0;k < 16;k += 1) {
+          ListOfRooms.get(i).get(j).add(new Wall(k,0));
+        }
+      }
+      if (i == ListOfRooms.size() - 1) {
+        for (int k = 0;k < 16;k += 1) {
+          ListOfRooms.get(i).get(j).add(new Wall(k,10));
+        }
+      }
+      if (j == 0) {
+        for (int k = 0;k < 11;k += 1) {
+          ListOfRooms.get(i).get(j).add(new Wall(0,k));
+        }
+      }
+      if (j == ListOfRooms.get(i).size() - 1) {
+        for (int k = 0;k < 11;k += 1) {
+          ListOfRooms.get(i).get(j).add(new Wall(15,k));
+        }
+      }
     }
   }
 
@@ -38,8 +58,8 @@ void setup() {
 void draw() {
   ListOfWalls = ListOfRooms.get(roomY).get(roomX);
   background(255);
-  fill(255,0,0);
-  rect(72,72,144,144);
+  //fill(255,0,0);
+  //rect(72,72,144,144);
   for (Wall w : ListOfWalls) {
     w.display();
   }
