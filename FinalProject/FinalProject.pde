@@ -6,7 +6,7 @@ void setup() {
   background(255);
   rectMode(CENTER);
   h = new Hero(20,20,height/2,width/2);
-  t = new Tektite(15,15, height/2, width/2);
+  t = new Tektite(20,20, height/2, width/2);
 }
 
 void draw() {

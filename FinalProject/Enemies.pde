@@ -23,7 +23,7 @@ public abstract class Enemies implements Fightable {
 
 public class Tektite extends Enemies {
 
-  public Tektite(int xpos, int ypos, int w, int h) {
+  public Tektite(int h, int w, int xpos, int ypos) {
     x = xpos;
     y=ypos;
     this.w = w;
