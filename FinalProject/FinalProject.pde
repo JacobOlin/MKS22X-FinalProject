@@ -41,6 +41,8 @@ void setup() {
   h = new Hero(48,48,width/2-24,height - 72);
   coolDown = 0;
   ListOfWalls = new ArrayList<Wall>();
+  ListOfMovableWalls = new ArrayList<MovableWall>();
+  MovableRoomsList = new ArrayList<ArrayList<ArrayList<MovableWall>>>();
   //int a = (int)(random(11));
   //for (int i = 0;i < a;i += 1) {
   //  Wall 
@@ -75,6 +77,9 @@ void draw() {
   //fill(255,0,0);
   //rect(72,72,144,144);
   for (Wall w : ListOfWalls) {
+    w.display();
+  }
+  for (MovableWall w : ListOfMovableWalls) {
     w.display();
   }
   if (coolDown > 0) {
@@ -148,6 +153,11 @@ public class Hero implements Fightable{
       for (Wall w : ListOfWalls) {
         if (x/48 == w.x && y/48 - 1 == w.y) {
           canMove = false;
+        }
+      }
+      for (int i = 0;i < ListOfMovableWalls.size();i += 1) {
+        if (x/48 == ListOfMovableWalls.get(i).x && y/48 - 1 == ListOfMovableWalls.get(i).y) {
+          ListOfMovableWalls.get(i).y -= 1;
         }
       }
       if (canMove) {
