@@ -20,7 +20,8 @@ public abstract class Enemies implements Fightable {
     rect(x, y, h, w);
   }
 
-  public void die() {
+  public boolean die() {
+    return hp <= 0;
   }
 }
 
