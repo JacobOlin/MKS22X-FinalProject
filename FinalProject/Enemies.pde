@@ -45,9 +45,11 @@ public class Tektite extends Enemies {
 
 public class peahat extends Enemies {
 
-  public peahat(int xpos, int ypos) {
+  public peahat(int h, int w, int xpos, int ypos) {
     x = xpos;
     y=ypos;
+    this.h = h;
+    this.w=w;
     hp = 3;
     damage = 1;
   }
@@ -65,9 +67,11 @@ public class peahat extends Enemies {
 
 public class Aquamentus extends Enemies {
 
-  public Aquamentus(int xpos, int ypos) {
+  public Aquamentus(int h, int w, int xpos, int ypos) {
     x = xpos;
     y=ypos;
+    this.h =h;
+    this.w =w;
     hp = 10;
     damage = 2;
   }
