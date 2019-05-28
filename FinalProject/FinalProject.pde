@@ -160,7 +160,7 @@ public class Hero implements Fightable{
           //ListOfWalls.add(new Wall(w.x,w.y - 1));
           //background(255);
           w.changeYCor(-1);
-          println(w.y);
+          //println(w.y);
         }
       }
       if (canMove) {
@@ -186,6 +186,11 @@ public class Hero implements Fightable{
           canMove = false;
         }
       }
+      for (MovableWall w : ListOfMovableWalls) {
+        if (x/48 - 1== w.x && y/48 == w.y) {
+          w.changeXCor(-1);
+        }
+      }
       if (canMove) {
         //x -= 48;
         slowMoveX = -6;
@@ -209,6 +214,11 @@ public class Hero implements Fightable{
           canMove = false;
         }
       }
+      for (MovableWall w : ListOfMovableWalls) {
+        if (x/48== w.x && y/48 + 1 == w.y) {
+          w.changeYCor(1);
+        }
+      }
       if (canMove) {
         //y += 48;
         slowMoveX = 0;
@@ -230,6 +240,11 @@ public class Hero implements Fightable{
       for (Wall w : ListOfWalls) {
         if (x/48 + 1 == w.x && y/48== w.y) {
           canMove = false;
+        }
+      }
+      for (MovableWall w : ListOfMovableWalls) {
+        if (x/48 + 1== w.x && y/48 == w.y) {
+          w.changeXCor(1);
         }
       }
       if (canMove) {
