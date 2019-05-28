@@ -57,9 +57,15 @@ public class Hero implements Fightable {
   void dealDamage(ArrayList<Enemies> List) {
     for (int i = 0; i < List.size(); i++) {
       Enemies e = List.get(i);
-      //if ( x + 24 <= e.x && x - 24 >= e.x && y <= e.y && y + 48 >= e.y) {
+      //println("player x " + x);
+      //println("player y " + y);
+      //println("enemy x " + e.x);
+      //println("enemy y " + e.y);
+
+
+      if ( x + 24 >= e.x && x - 24 <= e.x && y <= e.y && y + 48 >= e.y) {
         e.takeDamage(dmg);
-      //}
+      }
     }
   }
 }
