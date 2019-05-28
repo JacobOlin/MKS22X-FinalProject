@@ -1,6 +1,7 @@
 Hero h;
 int coolDown;
 Tektite t;
+ArrayList<Enemies> Enemies;
 
 void setup() {
   size(600,600);

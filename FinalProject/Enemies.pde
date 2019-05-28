@@ -8,16 +8,19 @@ public abstract class Enemies implements Fightable {
   int h;
 
   public abstract void move();
-  
+
 
   public abstract void takeDamage(int damage);
-  
+
 
   public abstract void attack();
 
   public void display() {
     fill(255, 0, 255);
     rect(x, y, h, w);
+  }
+
+  public void die() {
   }
 }
 
