@@ -40,6 +40,7 @@ public class Hero implements Fightable {
           fill(255, 0, 0);
           rect(x, y+48, 48, 48);
           // check to see if there is an eenmy in the attack range
+          dealDamage(Enemies);
         }
         if (direction == 'r') {
           fill(255, 0, 0);
@@ -53,7 +54,6 @@ public class Hero implements Fightable {
   void move() {
   } 
 
-  // return true is there is an enemy infront of Link
   void dealDamage(ArrayList<Enemies> List) {
     for (int i = 0; i < List.size(); i++) {
       Enemies e = List.get(i);
