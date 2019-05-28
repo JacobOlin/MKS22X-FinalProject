@@ -13,7 +13,7 @@ public abstract class Enemies implements Fightable {
   public abstract void takeDamage(int damage);
   
 
-  public abstract void attack( int damage);
+  public abstract void attack();
 
   public void display() {
     fill(255, 0, 255);
@@ -35,7 +35,7 @@ public class Tektite extends Enemies {
   public void move() {
   }
 
-  public void attack(int damage) {
+  public void attack() {
   }
 
   public void takeDamage(int damage) {
@@ -57,7 +57,7 @@ public class peahat extends Enemies {
   public void move() {
   }
 
-  public void attack(int damage) {
+  public void attack() {
   }
 
   public void takeDamage(int damage) {
@@ -79,7 +79,7 @@ public class Aquamentus extends Enemies {
   public void move() {
   }
 
-  public void attack(int damage) {
+  public void attack() {
   }
 
   public void takeDamage(int damage) {
