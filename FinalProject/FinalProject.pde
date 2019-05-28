@@ -155,9 +155,12 @@ public class Hero implements Fightable{
           canMove = false;
         }
       }
-      for (int i = 0;i < ListOfMovableWalls.size();i += 1) {
-        if (x/48 == ListOfMovableWalls.get(i).x && y/48 - 1 == ListOfMovableWalls.get(i).y) {
-          ListOfMovableWalls.get(i).y -= 1;
+      for (MovableWall w : ListOfMovableWalls) {
+        if (x/48 == w.x && y/48 - 1 == w.y) {
+          //ListOfWalls.add(new Wall(w.x,w.y - 1));
+          //background(255);
+          w.changeYCor(-1);
+          println(w.y);
         }
       }
       if (canMove) {
@@ -270,12 +273,12 @@ public class Wall{
   }
 }
 
-public class MovableWall extends Wall{ 
+public class MovableWall /*extends Wall*/{ 
   int x,y;
   
   
   MovableWall(int xCor,int yCor) {
-    super(xCor,yCor);
+    //super(xCor,yCor);
     x = xCor;
     y = yCor;
   }
@@ -286,6 +289,11 @@ public class MovableWall extends Wall{
   
   void changeYCor(int delta) {
     y += delta;
+  }
+  
+  void display() {
+    fill(0,0,255);
+    rect(48*x+24,48*y+24,48,48);
   }
   
   
