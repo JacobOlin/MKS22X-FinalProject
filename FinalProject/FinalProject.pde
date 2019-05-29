@@ -3,6 +3,7 @@ int coolDown;
 ArrayList<Wall> ListOfWalls;
 int roomX = 2;
 int roomY = 5;
+MovableWall movingWall;
 ArrayList<ArrayList<ArrayList<Wall>>> ListOfRooms;
 ArrayList<ArrayList<ArrayList<MovableWall>>> MovableRoomsList;
 ArrayList<MovableWall> ListOfMovableWalls;
@@ -159,7 +160,7 @@ public class Hero implements Fightable{
         if (x/48 == w.x && y/48 - 1 == w.y) {
           //ListOfWalls.add(new Wall(w.x,w.y - 1));
           //background(255);
-          w.changeYCor(-1);
+          movingWall= w;
           //println(w.y);
         }
       }
@@ -188,7 +189,7 @@ public class Hero implements Fightable{
       }
       for (MovableWall w : ListOfMovableWalls) {
         if (x/48 - 1== w.x && y/48 == w.y) {
-          w.changeXCor(-1);
+          movingWall = w;
         }
       }
       if (canMove) {
@@ -216,7 +217,7 @@ public class Hero implements Fightable{
       }
       for (MovableWall w : ListOfMovableWalls) {
         if (x/48== w.x && y/48 + 1 == w.y) {
-          w.changeYCor(1);
+          movingWall = w;
         }
       }
       if (canMove) {
@@ -244,7 +245,7 @@ public class Hero implements Fightable{
       }
       for (MovableWall w : ListOfMovableWalls) {
         if (x/48 + 1== w.x && y/48 == w.y) {
-          w.changeXCor(1);
+          movingWall = w;
         }
       }
       if (canMove) {
