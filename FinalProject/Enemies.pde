@@ -7,8 +7,22 @@ public abstract class Enemies implements Fightable {
   int w;
   int h;
 
-  public abstract void move();
-
+  public void move() {
+    float n = random(100);
+    if ( n >= 90) {
+      if ( n < 92.5) {
+        x += 2.5;
+      }
+      if ( n >= 92.5 && n < 95) {
+        x -= 2.5;
+      }
+      if ( n >= 95 && n < 97.5) {
+        y += 2.5;
+      } else {
+        y -=2.5;
+      }
+    }
+  }
 
   public abstract void takeDamage(int damage);
 
@@ -32,11 +46,8 @@ public class Tektite extends Enemies {
     y=ypos;
     this.w = w;
     this.h = h;
-    hp = 30;
+    hp = 3;
     damage = 1;
-  }
-
-  public void move() {
   }
 
   public void attack() {
@@ -56,9 +67,6 @@ public class peahat extends Enemies {
     this.w=w;
     hp = 3;
     damage = 1;
-  }
-
-  public void move() {
   }
 
   public void attack() {
