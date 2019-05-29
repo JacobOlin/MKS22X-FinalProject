@@ -165,19 +165,29 @@ public class Hero implements Fightable{
           canMove = false;
         }
       }
+      boolean canMoveWall = true;
+      boolean nextToWall = false;
       for (MovableWall w : ListOfMovableWalls) {
+        for (Wall w2 : ListOfWalls) {
+          if (w.x == w2.x && w.y - 1 == w2.y) {
+            canMoveWall = false;
+          }
+        }
         if (x/48 == w.x && y/48 - 1 == w.y) {
           //ListOfWalls.add(new Wall(w.x,w.y - 1));
           //background(255);
           //w.changeYCor(-1);
           //println(w.y);
-          w.coolDown = 8;
-          w.slowMoveX = 0;
-          w.slowMoveY = -6/48.0;
-          movingWall = w;
+          if (canMoveWall) {
+            w.coolDown = 8;
+            w.slowMoveX = 0;
+            w.slowMoveY = -6/48.0;
+            movingWall = w;
+          }
+          nextToWall = true;
         }
       }
-      if (canMove) {
+      if (canMove && (canMoveWall || !nextToWall)) {
         //y -= 48;
         slowMoveX = 0;
         slowMoveY = -6;
