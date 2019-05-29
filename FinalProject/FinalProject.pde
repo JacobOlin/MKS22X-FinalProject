@@ -394,3 +394,7 @@ public class MovableWall /*extends Wall*/{
   
   
 }
+
+public class LockedDoor{
+  
+}
