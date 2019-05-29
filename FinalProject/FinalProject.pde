@@ -29,14 +29,11 @@ void draw() {
   h.move();
   h.attack();
   h.display();
-<<<<<<< HEAD
   showEnemies(); // displays all the Enemies
   die();         // checks the list of enemies and removes them if they need to die
-=======
   showEnemies();
   die();
   moveEnemies();
->>>>>>> e62d14f9c9fc9670f3c85a308092742754cdb81d
 }
 
 void die() {
@@ -53,8 +50,7 @@ void showEnemies() {
     Enemies.get(i).display();
   }
 }
-<<<<<<< HEAD
-=======
+
 
 void moveEnemies(){
   for( int i =0; i < Enemies.size(); i++){
@@ -62,4 +58,3 @@ void moveEnemies(){
   }
 }
   
->>>>>>> e62d14f9c9fc9670f3c85a308092742754cdb81d
