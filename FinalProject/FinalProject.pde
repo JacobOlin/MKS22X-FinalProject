@@ -25,6 +25,7 @@ void draw() {
   h.display();
   showEnemies();
   die();
+  moveEnemies();
 }
 
 void die() {
@@ -39,6 +40,12 @@ void die() {
 void showEnemies(){
   for( int i = 0; i < Enemies.size(); i++){
     Enemies.get(i).display();
+  }
+}
+
+void moveEnemies(){
+  for( int i =0; i < Enemies.size(); i++){
+    Enemies.get(i).move();
   }
 }
   
