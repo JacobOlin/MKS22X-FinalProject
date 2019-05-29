@@ -67,10 +67,16 @@ public class Hero implements Fightable {
           e.takeDamage(dmg);
         }
       }
-      
-      if( direction == 'u'){
-        if( x + 24 >= e.x && x - 24 <= e.x && y >= e.y && y + 48 <= e.y)
+
+      if ( direction == 'u') {
+        if ( x + 24 >= e.x && x - 24 <= e.x && y >= e.y && y + 48 <= e.y)
         {
+          e.takeDamage(dmg);
+        }
+      }
+      
+      if ( direction == 'l'){
+        if ( x - 48 <= e.x && x >= e.x && y -24 <= e.y && y + 24 >= e.y){
           e.takeDamage(dmg);
         }
       }
