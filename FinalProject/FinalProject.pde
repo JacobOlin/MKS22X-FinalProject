@@ -23,8 +23,8 @@ void draw() {
   h.move();
   h.attack();
   h.display();
-  showEnemies();
-  die();
+  showEnemies(); // displays all the Enemies
+  die();         // checks the list of enemies and removes them if they need to die
 }
 
 void die() {

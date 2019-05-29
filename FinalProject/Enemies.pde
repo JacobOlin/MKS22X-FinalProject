@@ -32,7 +32,7 @@ public class Tektite extends Enemies {
     y=ypos;
     this.w = w;
     this.h = h;
-    hp = 3;
+    hp = 30;
     damage = 1;
   }
 

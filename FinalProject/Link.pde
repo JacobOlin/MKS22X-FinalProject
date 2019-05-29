@@ -39,7 +39,7 @@ public class Hero implements Fightable {
         if (direction == 'd') {
           fill(255, 0, 0);
           rect(x, y+48, 48, 48);
-          // check to see if there is an eenmy in the attack range
+          // check to see if there is an enemy in the attack range
           dealDamage(Enemies);
         }
         if (direction == 'r') {
@@ -57,14 +57,22 @@ public class Hero implements Fightable {
   void dealDamage(ArrayList<Enemies> List) {
     for (int i = 0; i < List.size(); i++) {
       Enemies e = List.get(i);
-      //println("player x " + x);
+      //println("player dmg " + dmg);
       //println("player y " + y);
-      //println("enemy x " + e.x);
+      //println("enemy hp " + e.hp);
       //println("enemy y " + e.y);
 
-
-      if ( x + 24 >= e.x && x - 24 <= e.x && y <= e.y && y + 48 >= e.y) {
-        e.takeDamage(dmg);
+      if (direction == 'd') {
+        if ( x + 24 >= e.x && x - 24 <= e.x && y <= e.y && y + 48 >= e.y) {
+          e.takeDamage(dmg);
+        }
+      }
+      
+      if( direction == 'u'){
+        if( x + 24 >= e.x && x - 24 <= e.x && y >= e.y && y + 48 <= e.y)
+        {
+          e.takeDamage(dmg);
+        }
       }
     }
   }
