@@ -1,4 +1,4 @@
-public class Hero implements Fightable {
+public class Hero implements Fightable { 
   int Imgh, Imgw, x, y, hp, dmg, slowMoveX, slowMoveY;
   char direction;
   Hero(int he, int wi, int startx, int starty) {
@@ -8,7 +8,7 @@ public class Hero implements Fightable {
     y = starty;
     hp = 100;
     dmg = 10;
-    direction = 'd';
+    direction = 'r';
   }
 
   void display() {
@@ -31,10 +31,12 @@ public class Hero implements Fightable {
         if (direction == 'u') {
           fill(255, 0, 0);
           rect(x, y-48, 48, 48);
+          dealDamage(Enemies);
         }
         if (direction == 'l') {
           fill(255, 0, 0);
           rect(x-48, y, 48, 48);
+          dealDamage(Enemies);
         }
         if (direction == 'd') {
           fill(255, 0, 0);
@@ -45,6 +47,7 @@ public class Hero implements Fightable {
         if (direction == 'r') {
           fill(255, 0, 0);
           rect(x+48, y, 48, 48);
+          dealDamage(Enemies);
         }
       }
     }
@@ -69,14 +72,20 @@ public class Hero implements Fightable {
       }
 
       if ( direction == 'u') {
-        if ( x + 24 >= e.x && x - 24 <= e.x && y >= e.y && y + 48 <= e.y)
+        if ( x + 24 >= e.x && x - 24 <= e.x && y >= e.y && y - 48 <= e.y)
         {
           e.takeDamage(dmg);
         }
       }
-      
-      if ( direction == 'l'){
-        if ( x - 48 <= e.x && x >= e.x && y -24 <= e.y && y + 24 >= e.y){
+
+      if ( direction == 'l') {
+        if ( x - 48 <= e.x && x >= e.x && y -24 <= e.y && y + 24 >= e.y) {
+          e.takeDamage(dmg);
+        }
+      }
+
+      if ( direction == 'r') {
+        if ( x <= e.x && x+ 48 >= e.x && y -24 <= e.y && y + 24 >= e.y) {
           e.takeDamage(dmg);
         }
       }
