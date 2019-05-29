@@ -3,6 +3,7 @@ int coolDown;
 ArrayList<Wall> ListOfWalls;
 int roomX = 2;
 int roomY = 5;
+MovableWall movingWall;
 ArrayList<ArrayList<ArrayList<Wall>>> ListOfRooms;
 ArrayList<ArrayList<ArrayList<MovableWall>>> MovableRoomsList;
 ArrayList<MovableWall> ListOfMovableWalls;
@@ -87,6 +88,15 @@ void draw() {
     h.x += h.slowMoveX;
     h.y += h.slowMoveY;
   }
+  if (movingWall != null && movingWall.coolDown > 0) {
+    movingWall.coolDown -= 1;
+    movingWall.changeXCor(movingWall.slowMoveX);
+    movingWall.changeYCor(movingWall.slowMoveY);
+    if (movingWall.coolDown == 0) {
+      movingWall = null;
+    }
+  }
+
   h.move();
   h.attack();
   h.display();
@@ -159,8 +169,12 @@ public class Hero implements Fightable{
         if (x/48 == w.x && y/48 - 1 == w.y) {
           //ListOfWalls.add(new Wall(w.x,w.y - 1));
           //background(255);
-          w.changeYCor(-1);
+          //w.changeYCor(-1);
           //println(w.y);
+          w.coolDown = 8;
+          w.slowMoveX = 0;
+          w.slowMoveY = -6/48.0;
+          movingWall = w;
         }
       }
       if (canMove) {
@@ -289,7 +303,9 @@ public class Wall{
 }
 
 public class MovableWall /*extends Wall*/{ 
-  int x,y;
+  float x,y;
+  float slowMoveX,slowMoveY;
+  int coolDown;
   
   
   MovableWall(int xCor,int yCor) {
@@ -298,11 +314,11 @@ public class MovableWall /*extends Wall*/{
     y = yCor;
   }
   
-  void changeXCor(int delta) {
+  void changeXCor(float delta) {
     x += delta;
   }
   
-  void changeYCor(int delta) {
+  void changeYCor(float delta) {
     y += delta;
   }
   
