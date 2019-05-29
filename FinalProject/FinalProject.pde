@@ -73,7 +73,7 @@ void setup() {
 
 void draw() {
   ListOfWalls = ListOfRooms.get(roomY).get(roomX);
-  ListOfMovableWalls = MovableRoomsList.get(roomY).get(roomX);
+  //ListOfMovableWalls = MovableRoomsList.get(roomY).get(roomX);
   background(255);
   //fill(255,0,0);
   //rect(72,72,144,144);
@@ -191,6 +191,10 @@ public class Hero implements Fightable{
       coolDown = 8;
       slowMoveX = 0;
       slowMoveY = 0;
+      ListOfMovableWalls = new ArrayList<MovableWall>();
+      if (MovableWallsInput[roomY*6+roomX].length > 0) {
+        ListOfMovableWalls.add(new MovableWall(MovableWallsInput[roomY*6+roomX][0],MovableWallsInput[roomY*6+roomX][1]));
+      }
     }
     if ((key == 'A' || key == 'a') && x - Imgw/2 > 0) {
       direction = 'l';
@@ -222,6 +226,10 @@ public class Hero implements Fightable{
       coolDown = 8;
       slowMoveX = 0;
       slowMoveY = 0;
+      ListOfMovableWalls = new ArrayList<MovableWall>();
+      if (MovableWallsInput[roomY*6+roomX].length > 0) {
+        ListOfMovableWalls.add(new MovableWall(MovableWallsInput[roomY*6+roomX][0],MovableWallsInput[roomY*6+roomX][1]));
+      }
     }
     if ((key == 'S' || key == 's') && y + Imgh/2 < height) {
       direction  = 'd';
@@ -253,6 +261,10 @@ public class Hero implements Fightable{
       coolDown = 8;
       slowMoveX = 0;
       slowMoveY = 0;
+      ListOfMovableWalls = new ArrayList<MovableWall>();
+      if (MovableWallsInput[roomY*6+roomX].length > 0) {
+        ListOfMovableWalls.add(new MovableWall(MovableWallsInput[roomY*6+roomX][0],MovableWallsInput[roomY*6+roomX][1]));
+      }
     }
     if ((key == 'D' || key == 'd') && x + Imgw/2 < width) {
       direction = 'r';
@@ -284,6 +296,10 @@ public class Hero implements Fightable{
       coolDown = 8;
       slowMoveX = 0;
       slowMoveY = 0;
+      ListOfMovableWalls = new ArrayList<MovableWall>();
+      if (MovableWallsInput[roomY*6+roomX].length > 0) {
+        ListOfMovableWalls.add(new MovableWall(MovableWallsInput[roomY*6+roomX][0],MovableWallsInput[roomY*6+roomX][1]));
+      }
     }
   }
 }  
