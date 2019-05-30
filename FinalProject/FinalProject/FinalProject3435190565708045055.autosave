@@ -1,28 +1,8 @@
-Hero h;
+  Hero h;
 int coolDown;
-<<<<<<< HEAD
-Tektite u, d, l, r;
-ArrayList<Enemies> Enemies;
-
-void setup() {
-  size(600, 600);
-  background(255);
-  rectMode(CENTER);
-  Enemies = new ArrayList<Enemies>();
-  h = new Hero(20, 20, height/2, width/2);
-  d = new Tektite(20, 20, height/2, width/2 + 35);
-  u = new Tektite(20, 20, height/2, width/2 - 35);
-  l = new Tektite(20, 20, height/2 - 35, width/2 );
-  r = new Tektite(20, 20, height/2 + 35, width/2 );
-  Enemies.add(d);
-  Enemies.add(r);
-  Enemies.add(u);
-  Enemies.add(l);
-=======
 ArrayList<Wall> ListOfWalls;
 int roomX = 2;
 int roomY = 5;
-MovableWall movingWall;
 ArrayList<ArrayList<ArrayList<Wall>>> ListOfRooms;
 ArrayList<ArrayList<ArrayList<MovableWall>>> MovableRoomsList;
 ArrayList<MovableWall> ListOfMovableWalls;
@@ -88,15 +68,12 @@ void setup() {
 
   //w = new Wall(3,3);
   //ListOfWalls.add(w);
->>>>>>> master
 }
 
 void draw() {
   ListOfWalls = ListOfRooms.get(roomY).get(roomX);
-  //ListOfMovableWalls = MovableRoomsList.get(roomY).get(roomX);
+  ListOfMovableWalls = MovableRoomsList.get(roomY).get(roomX);
   background(255);
-<<<<<<< HEAD
-=======
   //fill(255,0,0);
   //rect(72,72,144,144);
   for (Wall w : ListOfWalls) {
@@ -105,59 +82,16 @@ void draw() {
   for (MovableWall w : ListOfMovableWalls) {
     w.display();
   }
->>>>>>> master
   if (coolDown > 0) {
     coolDown -= 1;
     h.x += h.slowMoveX;
     h.y += h.slowMoveY;
-<<<<<<< HEAD
   }
-=======
-  }
-  if (movingWall != null && movingWall.coolDown > 0) {
-    movingWall.coolDown -= 1;
-    movingWall.changeXCor(movingWall.slowMoveX);
-    movingWall.changeYCor(movingWall.slowMoveY);
-    if (movingWall.coolDown == 0) {
-      movingWall = null;
-    }
-  }
-
->>>>>>> master
   h.move();
   h.attack();
   h.display();
-  showEnemies(); // displays all the Enemies
-  die();         // checks the list of enemies and removes them if they need to die
-  showEnemies();
-  die();
-  moveEnemies();
 }
 
-<<<<<<< HEAD
-void die() {
-  for ( int i = 0; i < Enemies.size(); i++) {
-    if (Enemies.get(i).die()) {
-      Enemies.remove(i);
-      i--;
-    }
-  }
-}
-
-void showEnemies() {
-  for ( int i = 0; i < Enemies.size(); i++) {
-    Enemies.get(i).display();
-  }
-}
-
-
-void moveEnemies(){
-  for( int i =0; i < Enemies.size(); i++){
-    Enemies.get(i).move();
-  }
-}
-  
-=======
 
 
 public class Hero implements Fightable{
@@ -221,29 +155,12 @@ public class Hero implements Fightable{
           canMove = false;
         }
       }
-      boolean canMoveWall = true;
-      boolean nextToWall = false;
-      for (MovableWall w : ListOfMovableWalls) {
-        for (Wall w2 : ListOfWalls) {
-          if (w.x == w2.x && w.y - 1 == w2.y) {
-            canMoveWall = false;
-          }
-        }
-        if (x/48 == w.x && y/48 - 1 == w.y) {
-          //ListOfWalls.add(new Wall(w.x,w.y - 1));
-          //background(255);
-          //w.changeYCor(-1);
-          //println(w.y);
-          if (canMoveWall) {
-            w.coolDown = 8;
-            w.slowMoveX = 0;
-            w.slowMoveY = -6/48.0;
-            movingWall = w;
-          }
-          nextToWall = true;
+      for (int i = 0;i < ListOfMovableWalls.size();i += 1) {
+        if (x/48 == ListOfMovableWalls.get(i).x && y/48 - 1 == ListOfMovableWalls.get(i).y) {
+          ListOfMovableWalls.get(i).y -= 1;
         }
       }
-      if (canMove && (canMoveWall || !nextToWall)) {
+      if (canMove) {
         //y -= 48;
         slowMoveX = 0;
         slowMoveY = -6;
@@ -257,10 +174,6 @@ public class Hero implements Fightable{
       coolDown = 8;
       slowMoveX = 0;
       slowMoveY = 0;
-      ListOfMovableWalls = new ArrayList<MovableWall>();
-      if (MovableWallsInput[roomY*6+roomX].length > 0) {
-        ListOfMovableWalls.add(new MovableWall(MovableWallsInput[roomY*6+roomX][0],MovableWallsInput[roomY*6+roomX][1]));
-      }
     }
     if ((key == 'A' || key == 'a') && x - Imgw/2 > 0) {
       direction = 'l';
@@ -270,25 +183,7 @@ public class Hero implements Fightable{
           canMove = false;
         }
       }
-      boolean canMoveWall = true;
-      boolean nextToWall = false;
-      for (MovableWall w : ListOfMovableWalls) {
-        for (Wall w2 : ListOfWalls) {
-          if (w.x - 1== w2.x && w.y == w2.y) {
-            canMoveWall = false;
-          }
-        }
-        if (x/48 - 1== w.x && y/48 == w.y) {
-          if (canMoveWall) {
-            w.coolDown = 8;
-            w.slowMoveX = -6/48.0;
-            w.slowMoveY = 0;
-            movingWall = w;
-          }
-          nextToWall = true;
-        }
-      }
-      if (canMove && (canMoveWall || !nextToWall)) {
+      if (canMove) {
         //x -= 48;
         slowMoveX = -6;
         slowMoveY = 0;        
@@ -302,10 +197,6 @@ public class Hero implements Fightable{
       coolDown = 8;
       slowMoveX = 0;
       slowMoveY = 0;
-      ListOfMovableWalls = new ArrayList<MovableWall>();
-      if (MovableWallsInput[roomY*6+roomX].length > 0) {
-        ListOfMovableWalls.add(new MovableWall(MovableWallsInput[roomY*6+roomX][0],MovableWallsInput[roomY*6+roomX][1]));
-      }
     }
     if ((key == 'S' || key == 's') && y + Imgh/2 < height) {
       direction  = 'd';
@@ -315,25 +206,7 @@ public class Hero implements Fightable{
           canMove = false;
         }
       }
-      boolean canMoveWall = true;
-      boolean nextToWall = false;
-      for (MovableWall w : ListOfMovableWalls) {
-        for (Wall w2 : ListOfWalls) {
-          if (w.x == w2.x && w.y + 1 == w2.y) {
-            canMoveWall = false;
-          }
-        }
-        if (x/48== w.x && y/48 + 1 == w.y) {
-          if (canMoveWall) {
-            w.coolDown = 8;
-            w.slowMoveX = 0;
-            w.slowMoveY = 6/48.0;
-            movingWall = w;
-          }
-          nextToWall = true;
-        }
-      }
-      if (canMove && (canMoveWall || !nextToWall)) {
+      if (canMove) {
         //y += 48;
         slowMoveX = 0;
         slowMoveY = 6;
@@ -347,10 +220,6 @@ public class Hero implements Fightable{
       coolDown = 8;
       slowMoveX = 0;
       slowMoveY = 0;
-      ListOfMovableWalls = new ArrayList<MovableWall>();
-      if (MovableWallsInput[roomY*6+roomX].length > 0) {
-        ListOfMovableWalls.add(new MovableWall(MovableWallsInput[roomY*6+roomX][0],MovableWallsInput[roomY*6+roomX][1]));
-      }
     }
     if ((key == 'D' || key == 'd') && x + Imgw/2 < width) {
       direction = 'r';
@@ -360,25 +229,7 @@ public class Hero implements Fightable{
           canMove = false;
         }
       }
-      boolean canMoveWall = true;
-      boolean nextToWall = false;
-      for (MovableWall w : ListOfMovableWalls) {
-        for (Wall w2 : ListOfWalls) {
-          if (w.x + 1 == w2.x && w.y == w2.y) {
-            canMoveWall = false;
-          }
-        }
-        if (x/48 + 1== w.x && y/48 == w.y) {
-          if (canMoveWall) {
-            w.coolDown = 8;
-            w.slowMoveX = 6/48.0;
-            w.slowMoveY = 0;
-            movingWall = w;
-          }
-          nextToWall = true;
-        }
-      }
-      if (canMove && (canMoveWall || !nextToWall)) {
+      if (canMove) {
         //x += 48;
         slowMoveX = 6;
         slowMoveY = 0;
@@ -392,10 +243,6 @@ public class Hero implements Fightable{
       coolDown = 8;
       slowMoveX = 0;
       slowMoveY = 0;
-      ListOfMovableWalls = new ArrayList<MovableWall>();
-      if (MovableWallsInput[roomY*6+roomX].length > 0) {
-        ListOfMovableWalls.add(new MovableWall(MovableWallsInput[roomY*6+roomX][0],MovableWallsInput[roomY*6+roomX][1]));
-      }
     }
   }
 }  
@@ -423,31 +270,23 @@ public class Wall{
   }
 }
 
-public class MovableWall /*extends Wall*/{ 
-  float x,y;
-  float slowMoveX,slowMoveY;
-  int coolDown;
+public class MovableWall extends Wall{ 
+  int x,y;
   
   
   MovableWall(int xCor,int yCor) {
-    //super(xCor,yCor);
+    super(xCor,yCor);
     x = xCor;
     y = yCor;
   }
   
-  void changeXCor(float delta) {
+  void changeXCor(int delta) {
     x += delta;
   }
   
-  void changeYCor(float delta) {
+  void changeYCor(int delta) {
     y += delta;
-  }
-  
-  void display() {
-    fill(0,0,255);
-    rect(48*x+24,48*y+24,48,48);
   }
   
   
 }
->>>>>>> master
