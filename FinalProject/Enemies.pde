@@ -8,18 +8,18 @@ public abstract class Enemies implements Fightable {
   int h;
 
   public void move() {
-    float n = random(100);
-    if ( n >= 90) {
-      if ( n < 92.5) {
-        x += 2.5;
+    float n = random(1000);
+    if ( n >= 900) {
+      if ( n < 925) {
+        x += width /2;
       }
-      if ( n >= 92.5 && n < 95) {
-        x -= 2.5;
+      if ( n >= 925 && n < 950) {
+        x -= width /2;
       }
-      if ( n >= 95 && n < 97.5) {
-        y += 2.5;
+      if ( n >= 950 && n < 975) {
+        y += height /2;
       } else {
-        y -=2.5;
+        y -= height /2;
       }
     }
   }
