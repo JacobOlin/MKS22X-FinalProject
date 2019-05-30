@@ -105,7 +105,7 @@ void draw() {
 
 
 public class Hero implements Fightable{
-  int Imgh,Imgw,x,y,hp,dmg,slowMoveX,slowMoveY;
+  int Imgh,Imgw,x,y,hp,dmg,slowMoveX,slowMoveY,keys;
   char direction;
   Hero(int he,int wi,int startx,int starty) {
     Imgh = he;
@@ -115,6 +115,7 @@ public class Hero implements Fightable{
     hp = 100;
     dmg = 10;
     direction = 'd';
+    keys = 0;
   }
   
   void display() {
@@ -396,5 +397,12 @@ public class MovableWall /*extends Wall*/{
 }
 
 public class LockedDoor{
+  int x,y;
+  boolean isLocked;
   
+  public LockedDoor(int xCor,int yCor) {
+    x = xCor;
+    y = yCor;
+    isLocked = true;
+  }
 }
