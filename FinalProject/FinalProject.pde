@@ -405,4 +405,8 @@ public class LockedDoor{
     y = yCor;
     isLocked = true;
   }
+  
+  public void unlock() {
+    isLocked = false;
+  }
 }
