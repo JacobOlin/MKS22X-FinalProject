@@ -4,6 +4,8 @@ ArrayList<Wall> ListOfWalls;
 int roomX = 2;
 int roomY = 5;
 MovableWall movingWall;
+ArrayList<ArrayList<ArrayList<LockedDoor>>> ListOfDoorsRooms;
+ArrayList<LockedDoor> ListOfDoors;
 ArrayList<ArrayList<ArrayList<Wall>>> ListOfRooms;
 ArrayList<MovableWall> ListOfMovableWalls;
 int[][] WallsInput = {{},
@@ -44,20 +46,27 @@ void setup() {
   coolDown = 0;
   ListOfWalls = new ArrayList<Wall>();
   ListOfMovableWalls = new ArrayList<MovableWall>();
+  ListOfDoors = new ArrayList<LockedDoor>();
   //int a = (int)(random(11));
   //for (int i = 0;i < a;i += 1) {
   //  Wall 
   ListOfRooms = new ArrayList<ArrayList<ArrayList<Wall>>>();
+  ListOfDoorsRooms = new ArrayList<ArrayList<ArrayList<LockedDoor>>>();
   for (int i = 0;i < 6;i += 1) {
     ListOfRooms.add(new ArrayList<ArrayList<Wall>>());
+    ListOfDoorsRooms.add(new ArrayList<ArrayList<LockedDoor>>());
     for (int j = 0;j < 6;j += 1) {
       ListOfRooms.get(i).add(new ArrayList<Wall>());
+      ListOfDoorsRooms.get(i).add(new ArrayList<LockedDoor>());
     }
   }
   for (int i = 0;i < ListOfRooms.size();i += 1) {
     for (int j = 0;j < ListOfRooms.get(i).size();j += 1) {
       for (int k = 0;k < WallsInput[i*6 + j].length;k += 2) {
         ListOfRooms.get(i).get(j).add(new Wall(WallsInput[i*6 + j][k],WallsInput[i*6 + j][k+1]));
+      }
+      for (int k = 0;k < LockedDoorsInput[i*6+j].length;k += 2) {
+        ListOfDoorsRooms.get(i).get(j).add(new LockedDoor(LockedDoorsInput[i*6+j][k],LockedDoorsInput[i*6+j][k+1]));
       }
     }
   }
@@ -68,6 +77,7 @@ void setup() {
 
 void draw() {
   ListOfWalls = ListOfRooms.get(roomY).get(roomX);
+  ListOfDoors = ListOfDoorsRooms.get(roomY).get(roomX);
   //ListOfMovableWalls = MovableRoomsList.get(roomY).get(roomX);
   background(255);
   //fill(255,0,0);
