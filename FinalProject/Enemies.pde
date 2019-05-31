@@ -9,17 +9,48 @@ public abstract class Enemies implements Fightable {
 
   public void move() {
     float n = random(1000);
-    if ( n >= 900) {
-      if ( n < 925) {
-        x += width /2;
+    if ( n >= 1 && n < 3) { // left
+      boolean canMove = true;
+      for (Wall w : ListOfWalls) {
+        if (x/48 - 1 == w.x && y/48 == w.y) {
+          canMove = false;
+        }
       }
-      if ( n >= 925 && n < 950) {
-        x -= width /2;
+      if (canMove) {
+        x -= width / 16;
       }
-      if ( n >= 950 && n < 975) {
-        y += height /2;
-      } else {
-        y -= height /2;
+    }
+    if ( n >= 3 && n < 5) { // right
+      boolean canMove = true;
+      for (Wall w : ListOfWalls) {
+        if (x/48 + 1 == w.x && y/48== w.y) {
+          canMove = false;
+        }
+      }
+      if (canMove) {
+        x += width / 16;
+      }
+    }
+    if ( n >= 5 && n < 7) { // up
+      boolean canMove = true;
+      for (Wall w : ListOfWalls) {
+        if (x/48 == w.x && y/48 - 1 == w.y) {
+          canMove = false;
+        }
+      }
+      if (canMove) {
+        y += height / 10;
+      }
+    } 
+    if ( n >= 7 && n < 9) { // down
+      boolean canMove = true;
+      for (Wall w : ListOfWalls) {
+        if (x/48 == w.x && y/48 + 1 == w.y) {
+          canMove = false;
+        }
+      }
+      if (canMove) {
+        y -= height / 10;
       }
     }
   }
