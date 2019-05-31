@@ -93,6 +93,9 @@ void draw() {
     h.x += h.slowMoveX;
     h.y += h.slowMoveY;
   }
+  for (LockedDoor d : ListOfDoors) {
+    d.display();
+  }
   if (movingWall != null && movingWall.coolDown > 0) {
     movingWall.coolDown -= 1;
     movingWall.changeXCor(movingWall.slowMoveX);
@@ -413,5 +416,10 @@ public class LockedDoor{
   
   public void unlock() {
     isLocked = false;
+  }
+  
+  public void display() {
+    fill(127,0,127);
+    rect(48*x+24,48*y+24,48,48);
   }
 }
