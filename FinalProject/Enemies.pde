@@ -17,7 +17,7 @@ public abstract class Enemies implements Fightable {
         }
       }
       if (canMove) {
-        x -= width / 16;
+        x -= 48;
       }
     }
     if ( n >= 3 && n < 5) { // right
@@ -28,7 +28,7 @@ public abstract class Enemies implements Fightable {
         }
       }
       if (canMove) {
-        x += width / 16;
+        x += 48;
       }
     }
     if ( n >= 5 && n < 7) { // up
@@ -39,7 +39,7 @@ public abstract class Enemies implements Fightable {
         }
       }
       if (canMove) {
-        y += height / 10;
+        y -= 48;
       }
     } 
     if ( n >= 7 && n < 9) { // down
@@ -50,7 +50,7 @@ public abstract class Enemies implements Fightable {
         }
       }
       if (canMove) {
-        y -= height / 10;
+        y += 48;
       }
     }
   }
@@ -74,7 +74,7 @@ public class Tektite extends Enemies {
 
   public Tektite(int h, int w, int xpos, int ypos) {
     x = xpos;
-    y=ypos;
+    y = ypos;
     this.w = w;
     this.h = h;
     hp = 3;

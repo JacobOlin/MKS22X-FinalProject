@@ -42,11 +42,10 @@ void setup() {
   background(255);
   rectMode(CENTER);
   Enemies = new ArrayList<Enemies>();
-  h = new Hero(20, 20, height/2, width/2);
-  d = new Tektite(20, 20, height/2, width/2 + 35);
-  u = new Tektite(20, 20, height/2, width/2 - 35);
-  l = new Tektite(20, 20, height/2 - 35, width/2 );
-  r = new Tektite(20, 20, height/2 + 35, width/2 );
+  d = new Tektite(48, 48, width/2-24, height - 72);
+  u = new Tektite(48, 48, width/2-24, height - 72);
+  l = new Tektite(48, 48, width/2-24, height - 72);
+  r = new Tektite(48, 48, width/2-24, height - 72);
   Enemies.add(d);
   Enemies.add(r);
   Enemies.add(u);
