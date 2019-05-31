@@ -5,7 +5,6 @@ int roomX = 2;
 int roomY = 5;
 MovableWall movingWall;
 ArrayList<ArrayList<ArrayList<Wall>>> ListOfRooms;
-ArrayList<ArrayList<ArrayList<MovableWall>>> MovableRoomsList;
 ArrayList<MovableWall> ListOfMovableWalls;
 int[][] WallsInput = {{},
                       {0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,1,0,1,1,1,2,1,3,1,4,1,5,1,6,1,7,1,8,1,9,1,10,2,0,2,1,2,9,2,10,3,0,3,1,3,9,3,10,4,0,4,1,4,9,4,10,5,0,5,1,5,9,5,10,6,0,6,1,/*6,5,*/6,9,6,10,7,0,7,1,7,4,7,6,7,9,7,10,8,0,8,1,8,3,8,7,8,9,8,10,9,0,9,1,9,4,9,6,9,9,9,10,10,0,10,1,10,5,10,9,10,10,11,0,11,1,11,9,11,10,12,0,12,1,12,9,12,10,13,0,13,1,13,9,13,10,14,0,14,1,14,2,14,3,14,4,14,6,14,7,14,8,14,9,14,10,15,0,15,1,15,2,15,3,15,4,15,6,15,7,15,8,15,9,15,10},
@@ -35,6 +34,8 @@ int[][] WallsInput = {{},
 int[][] MovableWallsInput = {{},{6,5},{},{},{},{},{},{},{},{},{},{},{},{7,5},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}};
 
 
+int[][] LockedDoorsInput = {{},{},{1,5},{},{},{},{},{},{7,1,8,1},{},{},{},{},{},{14,5},{},{7,1,8,1},{},{},{7,1,8,1},{},{},{},{},{},{},{},{},{},{},{},{},{7,1,8,1},{},{},{}};
+
 void setup() {
   size(768,528);
   background(255);
@@ -43,26 +44,20 @@ void setup() {
   coolDown = 0;
   ListOfWalls = new ArrayList<Wall>();
   ListOfMovableWalls = new ArrayList<MovableWall>();
-  MovableRoomsList = new ArrayList<ArrayList<ArrayList<MovableWall>>>();
   //int a = (int)(random(11));
   //for (int i = 0;i < a;i += 1) {
   //  Wall 
   ListOfRooms = new ArrayList<ArrayList<ArrayList<Wall>>>();
   for (int i = 0;i < 6;i += 1) {
     ListOfRooms.add(new ArrayList<ArrayList<Wall>>());
-    MovableRoomsList.add(new ArrayList<ArrayList<MovableWall>>());
     for (int j = 0;j < 6;j += 1) {
       ListOfRooms.get(i).add(new ArrayList<Wall>());
-      MovableRoomsList.get(i).add(new ArrayList<MovableWall>());
     }
   }
   for (int i = 0;i < ListOfRooms.size();i += 1) {
     for (int j = 0;j < ListOfRooms.get(i).size();j += 1) {
       for (int k = 0;k < WallsInput[i*6 + j].length;k += 2) {
         ListOfRooms.get(i).get(j).add(new Wall(WallsInput[i*6 + j][k],WallsInput[i*6 + j][k+1]));
-      }
-      if (MovableWallsInput[i*6+j].length > 0) {
-        MovableRoomsList.get(i).get(j).add(new MovableWall(MovableWallsInput[i*6+j][0],MovableWallsInput[i*6+j][1]));
       }
     }
   }
