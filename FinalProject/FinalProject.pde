@@ -1,6 +1,6 @@
 Hero h;
 int coolDown;
-Tektite u, d, l, r;
+Enemies u, d, l, r;
 ArrayList<Enemies> Enemies;
 ArrayList<Wall> ListOfWalls;
 int roomX = 2;
@@ -42,12 +42,10 @@ void setup() {
   background(255);
   rectMode(CENTER);
   Enemies = new ArrayList<Enemies>();
-  d = new Tektite(48, 48, width/2-24, height - 72);
-  u = new Tektite(48, 48, width/2-24, height - 72);
-  l = new Tektite(48, 48, width/2-24, height - 72);
-  r = new Tektite(48, 48, width/2-24, height - 72);
+  d = new Tektite(48, 48, width/2 -24, height - 72);
+  u = new Aquamentus(48, 48, width/2-24, height - 72);
+  l = new Peahat(48, 48, width/2-24, height -72);
   Enemies.add(d);
-  Enemies.add(r);
   Enemies.add(u);
   Enemies.add(l);
   h = new Hero(48, 48, width/2-24, height - 72);

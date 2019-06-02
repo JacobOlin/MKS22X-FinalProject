@@ -7,7 +7,7 @@ public class Hero implements Fightable{
     x = startx;
     y = starty;
     hp = 100;
-    dmg = 10;
+    dmg = 2;
     direction = 'd';
   }
   
@@ -246,10 +246,6 @@ public class Hero implements Fightable{
   void dealDamage(ArrayList<Enemies> List) {
     for (int i = 0; i < List.size(); i++) {
       Enemies e = List.get(i);
-      //println("player dmg " + dmg);
-      //println("player y " + y);
-      //println("enemy hp " + e.hp);
-      //println("enemy y " + e.y);
 
       if (direction == 'd') {
         if ( x + 24 >= e.x && x - 24 <= e.x && y <= e.y && y + 48 >= e.y) {

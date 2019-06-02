@@ -6,6 +6,7 @@ public abstract class Enemies implements Fightable {
   int y;
   int w;
   int h;
+  PImage image;
 
   public void move() {
     float n = random(1000);
@@ -79,9 +80,16 @@ public class Tektite extends Enemies {
     this.h = h;
     hp = 3;
     damage = 1;
+    image = loadImage("tektite.jpg");
   }
 
   public void attack() {
+    //if( dist(this.x, this.y, other.x, other.y) <=  
+  }
+  
+  public void display(){
+    super.display();
+    image(image, x - 24,y -24,w,h);
   }
 
   public void takeDamage(int damage) {
@@ -89,9 +97,9 @@ public class Tektite extends Enemies {
   }
 }
 
-public class peahat extends Enemies {
+public class Peahat extends Enemies {
 
-  public peahat(int h, int w, int xpos, int ypos) {
+  public Peahat(int h, int w, int xpos, int ypos) {
     x = xpos;
     y=ypos;
     this.h = h;
