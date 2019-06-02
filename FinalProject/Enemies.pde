@@ -88,7 +88,6 @@ public class Tektite extends Enemies {
   }
   
   public void display(){
-    super.display();
     image(image, x - 24,y -24,w,h);
   }
 
@@ -106,6 +105,7 @@ public class Peahat extends Enemies {
     this.w=w;
     hp = 3;
     damage = 1;
+    image = loadImage("peahat.png");
   }
 
   public void attack() {
@@ -113,6 +113,10 @@ public class Peahat extends Enemies {
 
   public void takeDamage(int damage) {
     hp -= damage;
+  }
+  
+  public void display(){
+    image(image, x - 24,y -24,w,h);
   }
 }
 
@@ -125,6 +129,7 @@ public class Aquamentus extends Enemies {
     this.w =w;
     hp = 10;
     damage = 2;
+    image = loadImage("Aquamentus.png");
   }
 
   public void move() {
@@ -135,6 +140,10 @@ public class Aquamentus extends Enemies {
 
   public void takeDamage(int damage) {
     hp -= damage;
+  }
+  
+  public void display(){
+    image(image, x - 24,y -24,w,h);
   }
 }
 
