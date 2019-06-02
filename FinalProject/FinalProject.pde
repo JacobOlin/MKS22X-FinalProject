@@ -1,5 +1,5 @@
-Hero h;
 int coolDown;
+Hero hero;
 Enemies u, d, l, r;
 ArrayList<Enemies> Enemies;
 ArrayList<Wall> ListOfWalls;
@@ -48,7 +48,7 @@ void setup() {
   Enemies.add(d);
   Enemies.add(u);
   Enemies.add(l);
-  h = new Hero(48, 48, width/2-24, height - 72);
+  hero = new Hero(48, 48, width/2-24, height - 72);
   coolDown = 0;
   ListOfWalls = new ArrayList<Wall>();
   ListOfMovableWalls = new ArrayList<MovableWall>();
@@ -93,8 +93,8 @@ void draw() {
   }
   if (coolDown > 0) {
     coolDown -= 1;
-    h.x += h.slowMoveX;
-    h.y += h.slowMoveY;
+    hero.x += hero.slowMoveX;
+    hero.y += hero.slowMoveY;
   }
   if (movingWall != null && movingWall.coolDown > 0) {
     movingWall.coolDown -= 1;
@@ -104,14 +104,13 @@ void draw() {
       movingWall = null;
     }
   }
-  h.move();
-  h.attack();
-  h.display();
+  hero.move();
+  hero.attack();
+  hero.display();
   showEnemies(); // displays all the Enemies
   die();         // checks the list of enemies and removes them if they need to die
-  showEnemies();
-  die();
   moveEnemies();
+  enemiesAttack();
 }
 
 void die() {
@@ -133,5 +132,11 @@ void showEnemies() {
 void moveEnemies() {
   for ( int i =0; i < Enemies.size(); i++) {
     Enemies.get(i).move();
+  }
+}
+
+void enemiesAttack(){
+  for( int i = 0; i < Enemies.size(); i++){
+    Enemies.get(i).attack();
   }
 }

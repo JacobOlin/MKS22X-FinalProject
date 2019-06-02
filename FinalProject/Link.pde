@@ -36,6 +36,7 @@ public class Hero implements Fightable{
         if (direction == 'l') {
           fill(255, 0, 0);
           rect(x-48, y, 48, 48);
+          //println("left");;
           dealDamage(Enemies);
         }
         if (direction == 'd') {

@@ -59,7 +59,14 @@ public abstract class Enemies implements Fightable {
   public abstract void takeDamage(int damage);
 
 
-  public abstract void attack();
+  public void attack(){
+    println("" + hero.hp);
+    if(hero.x + w /2 > x && hero.x - w/2 < x && hero.y + h/2 > y && hero.y - h/2 < y){
+      hero.takeDamage(1);
+      println("Link hp = " + hero.hp);
+    }
+  }
+  
 
   public void display() {
     fill(255, 0, 255);
@@ -81,10 +88,6 @@ public class Tektite extends Enemies {
     hp = 3;
     damage = 1;
     image = loadImage("tektite.jpg");
-  }
-
-  public void attack() {
-    //if( dist(this.x, this.y, other.x, other.y) <=  
   }
   
   public void display(){
@@ -127,12 +130,12 @@ public class Aquamentus extends Enemies {
     y=ypos;
     this.h =h;
     this.w =w;
-    hp = 10;
+    hp = 20;
     damage = 2;
     image = loadImage("Aquamentus.png");
   }
 
-  public void move() {
+  public void move() { // Aquamentus isnt supposed to move
   }
 
   public void attack() {
