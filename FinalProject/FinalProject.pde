@@ -87,7 +87,7 @@ void setup() {
 
 void draw() {
   if ( hero.hp <= 0) {
-    image(gameover, 0, 9,width, height);
+    image(gameover, 0, 0,width, height);
   } else {
     //println(hero.hp);
     ListOfWalls = ListOfRooms.get(roomY).get(roomX);
