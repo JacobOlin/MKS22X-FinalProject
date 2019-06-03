@@ -138,6 +138,7 @@ public class Aquamentus extends Enemies {
   }
 
   public void attack() { // spawns 3 fireballs 
+    super.attack();
     float n = random(100);
     if ( n > 97) {
       Fireballs.add(new Fireball(x, y, -.6, .6));
