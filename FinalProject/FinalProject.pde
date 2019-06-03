@@ -157,4 +157,7 @@ void enemiesAttack() {
   for ( int i = 0; i < Enemies.size(); i++) {
     Enemies.get(i).attack();
   }
+  for( int i = 0; i < Fireballs.size(); i++){
+    Fireballs.get(i).collide();
+  }
 }

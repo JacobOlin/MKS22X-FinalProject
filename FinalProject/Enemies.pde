@@ -137,7 +137,7 @@ public class Aquamentus extends Enemies {
   public void move() { // Aquamentus isnt supposed to move
   }
 
-  public void attack() {
+  public void attack() { // spawns 3 fireballs 
   }
 
   public void takeDamage(int damage) {
@@ -160,7 +160,7 @@ public class Fireball {
   PImage image;
 
   public void collide() {
-    if(hero.x + size /2 > x && hero.x - size/2 < x && hero.y + size/2 > y && hero.y - size/2 < y){
+    if((float)hero.x + size > x && (float)hero.x - size < x && (float)hero.y + size > y && (float)hero.y - size < y){
       hero.takeDamage(1);
       time = 0;
     }
@@ -177,13 +177,14 @@ public class Fireball {
     this.y =y;
     this.xspeed = xspeed;
     this.yspeed = yspeed;
-    time = 100;
+    time = 400;
     size = 20;
     image = loadImage("fireball.png");
   }
   
   void display(){
-    println(time);
+    //println(time);
+    //print("" + x +  ""  + y);;
     image(image,x,y,size,size);
   }
   
