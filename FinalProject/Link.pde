@@ -6,7 +6,7 @@ public class Hero implements Fightable{
     Imgw = wi;
     x = startx;
     y = starty;
-    hp = 100;
+    hp = 10;
     dmg = 2;
     direction = 'd';
   }

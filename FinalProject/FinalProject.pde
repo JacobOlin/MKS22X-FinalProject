@@ -2,6 +2,7 @@ int coolDown;
 Hero hero;
 Enemies u, d, l, r;
 ArrayList<Enemies> Enemies;
+ArrayList<Fireball> Fireballs;
 ArrayList<Wall> ListOfWalls;
 int roomX = 2;
 int roomY = 5;
@@ -42,12 +43,15 @@ void setup() {
   background(255);
   rectMode(CENTER);
   Enemies = new ArrayList<Enemies>();
+  Fireballs = new ArrayList<Fireball>();
   d = new Tektite(48, 48, width/2 -24, height - 72);
   u = new Aquamentus(48, 48, width/2-24, height - 72);
   l = new Peahat(48, 48, width/2-24, height -72);
+  Fireball f = new Fireball(20, 20, 1, 1);
   Enemies.add(d);
   Enemies.add(u);
   Enemies.add(l);
+  Fireballs.add(f);
   hero = new Hero(48, 48, width/2-24, height - 72);
   coolDown = 0;
   ListOfWalls = new ArrayList<Wall>();
@@ -120,11 +124,22 @@ void die() {
       i--;
     }
   }
+  for ( int i = 0; i < Fireballs.size(); i++) {
+    if ( Fireballs.get(i).time >= 0) {
+      Fireballs.get(i).time -= 1;
+    } else {
+      Fireballs.remove(i);
+      i--;
+    }
+  }
 }
 
 void showEnemies() {
   for ( int i = 0; i < Enemies.size(); i++) {
     Enemies.get(i).display();
+  }
+  for (int i = 0; i < Fireballs.size(); i++) {
+    Fireballs.get(i).display();
   }
 }
 
@@ -133,10 +148,13 @@ void moveEnemies() {
   for ( int i =0; i < Enemies.size(); i++) {
     Enemies.get(i).move();
   }
+  for ( int i = 0; i < Fireballs.size(); i++) {
+    Fireballs.get(i).move();
+  }
 }
 
-void enemiesAttack(){
-  for( int i = 0; i < Enemies.size(); i++){
+void enemiesAttack() {
+  for ( int i = 0; i < Enemies.size(); i++) {
     Enemies.get(i).attack();
   }
 }

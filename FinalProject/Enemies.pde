@@ -1,7 +1,6 @@
 public abstract class Enemies implements Fightable {
   int hp;
   int damage;
-  int size;
   int x;
   int y;
   int w;
@@ -60,10 +59,10 @@ public abstract class Enemies implements Fightable {
 
 
   public void attack(){
-    println("" + hero.hp);
+    //println("" + hero.hp);
     if(hero.x + w /2 > x && hero.x - w/2 < x && hero.y + h/2 > y && hero.y - h/2 < y){
       hero.takeDamage(1);
-      println("Link hp = " + hero.hp);
+      //println("Link hp = " + hero.hp);
     }
   }
   
@@ -152,15 +151,18 @@ public class Aquamentus extends Enemies {
 
 public class Fireball {
   int damage;
-  int x;
-  int y;
-  int xspeed;
-  int yspeed;
+  float x;
+  float y;
+  float xspeed;
+  float yspeed;
   int size;
+  int time;
+  PImage image;
 
-  public void collide(Enemies other) {
-    if (dist(this.x, this.y, other.x, other.y) <= (other.size + this.size) / 2) {
-      other.takeDamage(damage);
+  public void collide() {
+    if(hero.x + size /2 > x && hero.x - size/2 < x && hero.y + size/2 > y && hero.y - size/2 < y){
+      hero.takeDamage(1);
+      time = 0;
     }
   }
 
@@ -169,11 +171,21 @@ public class Fireball {
     y += yspeed;
   }
 
-  public Fireball(int damage, int x, int y, int xspeed, int yspeed) {
-    this.damage = damage;
+  public Fireball(float x, float y, float xspeed,float yspeed) {
+    this.damage = 1;
     this.x = x;
     this.y =y;
     this.xspeed = xspeed;
     this.yspeed = yspeed;
+    time = 100;
+    size = 20;
+    image = loadImage("fireball.png");
   }
+  
+  void display(){
+    println(time);
+    image(image,x,y,size,size);
+  }
+  
+  
 }
