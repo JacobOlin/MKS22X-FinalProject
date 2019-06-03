@@ -88,6 +88,10 @@ void setup() {
 void draw() {
   if ( hero.hp <= 0) {
     image(gameover, 0, 0,width, height);
+    if(key == 'X' || key == 'x'){
+      setup();
+    }
+      
   } else {
     //println(hero.hp);
     ListOfWalls = ListOfRooms.get(roomY).get(roomX);
