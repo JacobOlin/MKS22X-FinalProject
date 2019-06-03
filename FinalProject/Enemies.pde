@@ -58,14 +58,14 @@ public abstract class Enemies implements Fightable {
   public abstract void takeDamage(int damage);
 
 
-  public void attack(){
+  public void attack() {
     //println("" + hero.hp);
-    if(hero.x + w /2 > x && hero.x - w/2 < x && hero.y + h/2 > y && hero.y - h/2 < y){
+    if (hero.x + w /2 > x && hero.x - w/2 < x && hero.y + h/2 > y && hero.y - h/2 < y) {
       hero.takeDamage(1);
       //println("Link hp = " + hero.hp);
     }
   }
-  
+
 
   public void display() {
     fill(255, 0, 255);
@@ -88,9 +88,9 @@ public class Tektite extends Enemies {
     damage = 1;
     image = loadImage("tektite.jpg");
   }
-  
-  public void display(){
-    image(image, x - 24,y -24,w,h);
+
+  public void display() {
+    image(image, x - 24, y -24, w, h);
   }
 
   public void takeDamage(int damage) {
@@ -116,9 +116,9 @@ public class Peahat extends Enemies {
   public void takeDamage(int damage) {
     hp -= damage;
   }
-  
-  public void display(){
-    image(image, x - 24,y -24,w,h);
+
+  public void display() {
+    image(image, x - 24, y -24, w, h);
   }
 }
 
@@ -138,14 +138,20 @@ public class Aquamentus extends Enemies {
   }
 
   public void attack() { // spawns 3 fireballs 
+    float n = random(100);
+    if ( n > 97) {
+      Fireballs.add(new Fireball(x, y, -.6, .6));
+      Fireballs.add(new Fireball(x, y, -.6, 0));
+      Fireballs.add(new Fireball(x, y, -.6, -.6));
+    }
   }
 
   public void takeDamage(int damage) {
     hp -= damage;
   }
-  
-  public void display(){
-    image(image, x - 24,y -24,w,h);
+
+  public void display() {
+    image(image, x - 24, y -24, w, h);
   }
 }
 
@@ -160,7 +166,7 @@ public class Fireball {
   PImage image;
 
   public void collide() {
-    if(hero.x + size * 2 > x && hero.x - size * 2 < x && hero.y + size * 2 > y && hero.y - size * 2 < y){
+    if (hero.x + size * 2 > x && hero.x - size * 2 < x && hero.y + size * 2 > y && hero.y - size * 2 < y) {
       hero.takeDamage(1);
       time = 0;
     }
@@ -171,7 +177,7 @@ public class Fireball {
     y += yspeed;
   }
 
-  public Fireball(float x, float y, float xspeed,float yspeed) {
+  public Fireball(float x, float y, float xspeed, float yspeed) {
     this.damage = 1;
     this.x = x;
     this.y =y;
@@ -181,12 +187,10 @@ public class Fireball {
     size = 20;
     image = loadImage("fireball.png");
   }
-  
-  void display(){
-    println(time);
+
+  void display() {
+    //println(time);
     //print("" + x +  ""  + y);;
-    image(image,x,y,size,size);
+    image(image, x, y, size, size);
   }
-  
-  
 }
