@@ -1,0 +1,138 @@
+[33mcommit 699d383086240b4b18bad6f0996629001a9b16ff[m
+Author: CodyBagwandeen <cbagwandeen@stuy.edu>
+Date:   Thu May 23 11:39:18 2019 -0400
+
+    an enemy exists
+
+[1mdiff --git a/FinalProject/Enemies.pde b/FinalProject/Enemies.pde[m
+[1mindex 998faa0..defbac3 100644[m
+[1m--- a/FinalProject/Enemies.pde[m
+[1m+++ b/FinalProject/Enemies.pde[m
+[36m@@ -4,22 +4,30 @@[m [mpublic abstract class Enemies implements Fightable {[m
+   int size;[m
+   int x;[m
+   int y;[m
+[32m+[m[32m  int w;[m
+[32m+[m[32m  int h;[m
+ [m
+[31m-  public abstract void move() {[m
+[31m-  }[m
+[32m+[m[32m  public abstract void move();[m
+[32m+[m[41m  [m
+ [m
+[31m-  public abstract void takeDamage(int damage) {[m
+[31m-  }[m
+[32m+[m[32m  public abstract void takeDamage(int damage);[m
+[32m+[m[41m  [m
+ [m
+[31m-  public abstract void attack( int damage) {[m
+[32m+[m[32m  public abstract void attack( int damage);[m
+[32m+[m
+[32m+[m[32m  public void display() {[m
+[32m+[m[32m    fill(255, 0, 255);[m
+[32m+[m[32m    rect(x, y, h, w);[m
+   }[m
+ }[m
+ [m
+ public class Tektite extends Enemies {[m
+ [m
+[31m-  public Tektite(int xpos, int ypos) {[m
+[32m+[m[32m  public Tektite(int xpos, int ypos, int w, int h) {[m
+     x = xpos;[m
+     y=ypos;[m
+[32m+[m[32m    this.w = w;[m
+[32m+[m[32m    this.h = h;[m
+     hp = 3;[m
+     damage = 1;[m
+   }[m
+[36m@@ -35,9 +43,9 @@[m [mpublic class Tektite extends Enemies {[m
+   }[m
+ }[m
+ [m
+[31m-public class Peahat extends Enemies {[m
+[32m+[m[32mpublic class peahat extends Enemies {[m
+ [m
+[31m-  public PeaHat(int xpos, int ypos) {[m
+[32m+[m[32m  public peahat(int xpos, int ypos) {[m
+     x = xpos;[m
+     y=ypos;[m
+     hp = 3;[m
+[36m@@ -81,10 +89,11 @@[m [mpublic class Fireball {[m
+   int y;[m
+   int xspeed;[m
+   int yspeed;[m
+[32m+[m[32m  int size;[m
+ [m
+[31m-  public void collide(Fightable Other) {[m
+[32m+[m[32m  public void collide(Enemies other) {[m
+     if (dist(this.x, this.y, other.x, other.y) <= (other.size + this.size) / 2) {[m
+[31m-      Other.takeDamage(damage);[m
+[32m+[m[32m      other.takeDamage(damage);[m
+     }[m
+   }[m
+ [m
+[36m@@ -93,11 +102,11 @@[m [mpublic class Fireball {[m
+     y += yspeed;[m
+   }[m
+ [m
+[31m-  public Fireball(int damage, int x, int y, int, int xspeed, int yspeed) {[m
+[32m+[m[32m  public Fireball(int damage, int x, int y, int xspeed, int yspeed) {[m
+     this.damage = damage;[m
+     this.x = x;[m
+     this.y =y;[m
+[31m-    this.xpseed = xpseed;[m
+[32m+[m[32m    this.xspeed = xspeed;[m
+     this.yspeed = yspeed;[m
+   }[m
+ }[m
+[1mdiff --git a/FinalProject/Fightable.pde b/FinalProject/Fightable.pde[m
+[1mindex b641c45..1212115 100644[m
+[1m--- a/FinalProject/Fightable.pde[m
+[1m+++ b/FinalProject/Fightable.pde[m
+[36m@@ -1,13 +1,10 @@[m
+[31m-public Interface Fightable{[m
+[31m-  int hp;[m
+[31m-  int damamge;[m
+[31m-  int size;[m
+[32m+[m[32minterface Fightable{[m
+   [m
+[31m-  public void takeDamage(int damage){[m
+[31m-  }[m
+[32m+[m[32m  void takeDamage(int damage);[m
+[32m+[m[41m  [m
+[32m+[m[32m  void attack(int damage);[m
+[32m+[m[41m  [m
+[32m+[m[32m  void move();[m
+   [m
+[31m-  public void attack(int damage){[m
+[31m-  }[m
+   [m
+[31m-  public void move()[m
+ }[m
+[1mdiff --git a/FinalProject/FinalProject.pde b/FinalProject/FinalProject.pde[m
+[1mindex ab388ab..1a80788 100644[m
+[1m--- a/FinalProject/FinalProject.pde[m
+[1m+++ b/FinalProject/FinalProject.pde[m
+[36m@@ -1,10 +1,12 @@[m
+ Hero h;[m
+[32m+[m[32mTektite t;[m
+ [m
+ void setup() {[m
+   size(600,600);[m
+   background(255);[m
+   rectMode(CENTER);[m
+   h = new Hero(20,20,height/2,width/2);[m
+[32m+[m[32m  t = new Tektite(15,15, height/2, width/2);[m
+ }[m
+ [m
+ void draw() {[m
+[36m@@ -24,6 +26,9 @@[m [mvoid draw() {[m
+     }[m
+   }[m
+   h.display();[m
+[32m+[m[32m  t.display();[m
+[32m+[m[41m  [m
+[32m+[m[41m  [m
+ }[m
+ [m
+ public class Hero{[m

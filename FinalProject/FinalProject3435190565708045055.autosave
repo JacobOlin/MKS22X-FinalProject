@@ -1,12 +1,8 @@
+  Hero h;
 int coolDown;
-Hero hero;
-Enemies u, d, l, r;
-ArrayList<Enemies> Enemies;
-ArrayList<Fireball> Fireballs;
 ArrayList<Wall> ListOfWalls;
 int roomX = 2;
 int roomY = 5;
-MovableWall movingWall;
 ArrayList<ArrayList<ArrayList<Wall>>> ListOfRooms;
 ArrayList<ArrayList<ArrayList<MovableWall>>> MovableRoomsList;
 ArrayList<MovableWall> ListOfMovableWalls;
@@ -20,13 +16,13 @@ int[][] WallsInput = {{},
                       {0,0,0,1,0,2,0,3,0,4,0,6,0,7,0,8,0,9,0,10,1,0,1,1,1,2,1,3,1,4,1,6,1,7,1,8,1,9,1,10,2,0,2,1,2,9,2,10,3,0,3,1,3,3,3,4,3,5,3,6,3,7,3,9,3,10,4,0,4,1,4,3,4,7,4,9,4,10,5,0,5,1,5,3,5,7,5,9,5,10,6,0,6,1,6,3,6,7,6,9,6,10,7,0,7,1,7,3,7,9,7,10,8,0,8,1,8,3,8,9,8,10,9,0,9,1,9,3,9,7,9,9,9,10,10,0,10,1,10,3,10,7,10,9,10,10,11,0,11,1,11,3,11,7,11,9,11,10,12,0,12,1,12,3,12,4,12,5,12,6,12,7,12,9,12,10,13,0,13,1,13,9,13,10,14,0,14,1,14,2,14,3,14,3,14,4,14,5,14,6,14,7,14,8,14,9,14,10,15,0,15,1,15,2,15,3,15,4,15,5,15,6,15,7,15,8,15,9,15,10},
                       {0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,1,0,1,1,1,2,1,3,1,4,1,5,1,6,1,7,1,8,1,9,1,10,2,0,2,1,2,9,2,10,3,0,3,1,3,9,3,10,4,0,4,1,4,9,4,10,5,0,5,1,5,9,5,10,6,0,6,1,6,9,6,10,7,0,7,1,7,9,7,10,8,0,8,1,8,9,8,10,9,0,9,1,9,9,9,10,10,0,10,1,10,9,10,10,11,0,11,1,11,9,11,10,12,0,12,1,12,9,12,10,13,0,13,1,13,9,13,10,14,0,14,1,14,2,14,3,14,4,14,6,14,7,14,8,14,9,14,10,15,0,15,1,15,2,15,3,15,4,15,6,15,7,15,8,15,9,15,10},
                       {0,0,0,1,0,2,0,3,0,4,0,6,0,7,0,8,0,9,0,10,1,0,1,1,1,2,1,3,1,4,1,6,1,7,1,8,1,9,1,10,2,0,2,1,2,9,2,10,3,0,3,1,3,9,3,10,4,0,4,1,4,9,4,10,5,0,5,1,5,9,5,10,6,0,6,1,6,9,6,10,7,0,7,1,/*7,5,*/8,0,8,1,9,0,9,1,9,9,9,10,10,0,10,1,10,9,10,10,11,0,11,1,11,9,11,10,12,0,12,1,12,9,12,10,13,0,13,1,13,9,13,10,14,0,14,1,14,2,14,3,14,4,14,6,14,7,14,8,14,9,14,10,15,0,15,1,15,2,15,3,15,4,15,6,15,7,15,8,15,9,15,10},
-                      {0,0,0,1,0,2,0,3,0,4,0,6,0,7,0,8,0,9,0,10,1,0,1,1,1,2,1,3,1,4,1,6,1,7,1,8,1,9,1,10,2,0,2,1,2,9,2,10,3,0,3,1,3,3,3,7,3,9,3,10,4,0,4,1,4,3,4,7,4,9,4,10,5,0,5,1,5,9,5,10,6,0,6,1,6,9,6,10,7,5,7,9,7,10,8,5,8,9,8,10,9,0,9,1,9,9,9,10,10,0,10,1,10,9,10,10,11,0,11,1,11,3,11,7,11,9,11,10,12,0,12,1,12,3,12,7,12,9,12,10,13,0,13,1,13,9,13,10,14,0,14,1,14,2,14,3,14,4,14,6,14,7,14,8,14,9,14,10,15,0,15,1,15,2,15,3,15,4,15,6,15,7,15,8,15,9,15,10},
-                      {0,0,0,1,0,2,0,3,0,4,0,6,0,7,0,8,0,9,0,10,1,0,1,1,1,2,1,3,1,4,1,6,1,7,1,8,1,9,1,10,2,0,2,1,2,9,2,10,3,0,3,1,3,9,3,10,4,0,4,1,4,4,4,6,4,9,4,10,5,0,5,1,5,9,5,10,6,0,6,1,6,9,6,10,7,0,7,1,7,9,7,10,8,0,8,1,8,9,8,10,9,0,9,1,9,9,9,10,10,0,10,1,10,9,10,10,11,0,11,1,11,4,11,6,11,9,11,10,12,0,12,1,12,9,12,10,13,0,13,1,13,9,13,10,14,0,14,1,14,2,14,3,14,4,14,6,14,7,14,8,14,9,14,10,15,0,15,1,15,2,15,3,15,4,15,6,15,7,15,8,15,9,15,10},
+                      {0,0,0,1,0,2,0,3,0,4,0,6,0,7,0,8,0,9,0,10,1,0,1,1,1,2,1,3,1,4,1,6,1,7,1,8,1,9,1,10,2,0,2,1,2,9,2,10,3,0,3,1,3,3,3,7,3,9,3,10,4,0,4,1,4,3,4,7,4,9,4,10,5,0,5,1,5,9,5,10,6,0,6,1,6,9,6,10,7,5,8,5,9,0,9,1,9,9,9,10,10,0,10,1,10,9,10,10,11,0,11,1,11,3,11,7,11,9,11,10,12,0,12,1,12,3,12,7,12,9,12,10,13,0,13,1,13,9,13,10,14,0,14,1,14,2,14,3,14,4,14,6,14,7,14,8,14,9,14,10,15,0,15,1,15,2,15,3,15,4,15,6,15,7,15,8,15,9,15,10},
+                      {0,0,0,1,0,2,0,3,0,4,0,6,0,7,0,8,0,9,0,10,1,0,1,1,1,2,1,3,1,4,1,6,1,7,1,8,1,9,1,10,2,0,2,1,2,9,2,10,3,0,3,1,3,9,3,10,4,0,4,1,4,4,4,6,4,9,4,10,5,0,5,1,5,9,5,10,6,0,6,1,6,9,6,10,7,0,7,1,8,0,8,1,9,0,9,1,9,9,9,10,10,0,10,1,10,9,10,10,11,0,11,1,11,4,11,6,11,9,11,10,12,0,12,1,12,9,12,10,13,0,13,1,13,9,13,10,14,0,14,1,14,2,14,3,14,4,14,6,14,7,14,8,14,9,14,10,15,0,15,1,15,2,15,3,15,4,15,6,15,7,15,8,15,9,15,10},
                       {0,0,0,1,0,2,0,3,0,4,0,6,0,7,0,8,0,9,0,10,1,0,1,1,1,2,1,3,1,4,1,6,1,7,1,8,1,9,1,10,2,0,2,1,2,9,2,10,3,0,3,1,3,3,3,5,3,7,3,9,3,10,4,0,4,1,4,9,4,10,5,0,5,1,5,3,5,5,5,7,5,9,5,10,6,0,6,1,6,9,6,10,7,3,7,5,7,7,7,9,7,10,8,3,8,5,8,7,8,9,8,10,9,0,9,1,9,9,9,10,10,0,10,1,10,3,10,5,10,7,10,9,10,10,11,0,11,1,11,9,11,10,12,0,12,1,12,3,12,5,12,7,12,9,12,10,13,0,13,1,13,9,13,10,14,0,14,1,14,2,14,3,14,4,14,5,14,6,14,7,14,8,14,9,14,10,15,0,15,1,15,2,15,3,15,4,15,4,15,5,15,6,15,7,15,8,15,9,15,10},
                       {},{},
                       {0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,1,0,1,1,1,2,1,3,1,4,1,5,1,6,1,7,1,8,1,9,1,10,2,0,2,1,2,9,2,10,3,0,3,1,3,9,3,10,4,0,4,1,4,9,4,10,5,0,5,1,5,9,5,10,6,0,6,1,6,9,6,10,7,4,7,5,7,6,7,9,7,10,8,4,8,5,8,6,8,9,8,10,9,0,9,1,9,9,9,10,10,0,10,1,10,9,10,10,11,0,11,1,11,9,11,10,12,0,12,1,12,9,12,10,13,0,13,1,13,9,13,10,14,0,14,1,14,2,14,3,14,4,14,6,14,7,14,8,14,9,14,10,15,0,15,1,15,2,15,3,15,4,15,6,15,7,15,8,15,9,15,10},
-                      {0,0,0,1,0,2,0,3,0,4,0,6,0,7,0,8,0,9,0,10,1,0,1,1,1,2,1,3,1,4,1,6,1,7,1,8,1,9,1,10,2,0,2,1,2,9,2,10,3,0,3,1,3,9,3,10,4,0,4,1,4,4,4,6,4,9,4,10,5,0,5,1,5,9,5,10,6,0,6,1,6,9,6,10,7,0,7,1,8,0,8,1,9,0,9,1,9,9,9,10,10,0,10,1,10,9,10,10,11,0,11,1,11,4,11,6,11,9,11,10,12,0,12,1,12,9,12,10,13,0,13,1,13,9,13,10,14,0,14,1,14,2,14,3,14,4,14,6,14,7,14,8,14,9,14,10,15,0,15,1,15,2,15,3,15,4,15,6,15,7,15,8,15,9,15,10},
-                      {0,0,0,1,0,2,0,3,0,4,0,6,0,7,0,8,0,9,0,10,1,0,1,1,1,2,1,3,1,4,1,6,1,7,1,8,1,9,1,10,2,0,2,1,2,9,2,10,3,0,3,1,3,9,3,10,4,0,4,1,4,3,4,7,4,9,4,10,5,0,5,1,5,9,5,10,6,0,6,1,6,9,6,10,7,0,7,1,7,9,7,10,8,0,8,1,8,9,8,10,9,0,9,1,9,9,9,10,10,0,10,1,10,9,10,10,11,0,11,1,11,3,11,7,11,9,11,10,12,0,12,1,12,9,12,10,13,0,13,1,13,9,13,10,14,0,14,1,14,2,14,3,14,4,14,5,14,6,14,7,14,8,14,9,14,10,15,0,15,1,15,2,15,3,15,4,15,5,15,6,15,7,15,8,15,9,15,10},
+                      {0,0,0,1,0,2,0,3,0,4,0,6,0,7,0,8,0,9,0,10,1,0,1,1,1,2,1,3,1,4,1,6,1,7,1,8,1,9,1,10,2,0,2,1,2,9,2,10,3,0,3,1,3,9,3,10,4,0,4,1,4,4,4,6,4,9,4,10,5,0,5,1,5,9,5,10,6,0,6,1,6,9,6,10,9,0,9,1,9,9,9,10,10,0,10,1,10,9,10,10,11,0,11,1,11,4,11,6,11,9,11,10,12,0,12,1,12,9,12,10,13,0,13,1,13,9,13,10,14,0,14,1,14,2,14,3,14,4,14,6,14,7,14,8,14,9,14,10,15,0,15,1,15,2,15,3,15,4,15,6,15,7,15,8,15,9,15,10},
+                      {0,0,0,1,0,2,0,3,0,4,0,6,0,7,0,8,0,9,0,10,1,0,1,1,1,2,1,3,1,4,1,6,1,7,1,8,1,9,1,10,2,0,2,1,2,9,2,10,3,0,3,1,3,9,3,10,4,0,4,1,4,3,4,7,4,9,4,10,5,0,5,1,5,9,5,10,6,0,6,1,6,9,6,10,7,9,7,10,8,9,8,10,9,0,9,1,9,9,9,10,10,0,10,1,10,9,10,10,11,0,11,1,11,3,11,7,11,9,11,10,12,0,12,1,12,9,12,10,13,0,13,1,13,9,13,10,14,0,14,1,14,2,14,3,14,4,14,5,14,6,14,7,14,8,14,9,14,10,15,0,15,1,15,2,15,3,15,4,15,5,15,6,15,7,15,8,15,9,15,10},
                       {},{},{},{},
                       {0,0,0,1,0,2,0,3,0,4,0,5,0,6,0,7,0,8,0,9,0,10,1,0,1,1,1,2,1,3,1,4,1,5,1,6,1,7,1,8,1,9,1,10,2,0,2,1,2,9,2,10,3,0,3,1,3,9,3,10,4,0,4,1,4,9,4,10,5,0,5,1,5,9,5,10,6,0,6,1,6,9,6,10,7,4,7,5,7,6,8,4,8,5,8,6,9,0,9,1,9,9,9,10,10,0,10,1,10,9,10,10,11,0,11,1,11,9,11,10,12,0,12,1,12,9,12,10,13,0,13,1,13,9,13,10,14,0,14,1,14,2,14,3,14,4,14,5,14,6,14,7,14,8,14,9,14,10,15,0,15,1,15,2,15,3,15,4,15,5,15,6,15,7,15,8,15,9,15,10},
                       {},{},{},{},
@@ -37,21 +33,12 @@ int[][] WallsInput = {{},
                       
 int[][] MovableWallsInput = {{},{6,5},{},{},{},{},{},{},{},{},{},{},{},{7,5},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}};
 
+
 void setup() {
-  size(768, 528);
+  size(768,528);
   background(255);
   rectMode(CENTER);
-  Enemies = new ArrayList<Enemies>();
-  Fireballs = new ArrayList<Fireball>();
-  d = new Tektite(48, 48, width/2 -24, height - 72);
-  u = new Aquamentus(48, 48, width/2-24, height - 72);
-  l = new Peahat(48, 48, width/2-24, height -72);
-  Fireball f = new Fireball(20, 20, 1, 1);
-  Enemies.add(d);
-  Enemies.add(u);
-  Enemies.add(l);
-  Fireballs.add(f);
-  hero = new Hero(48, 48, width/2-24, height - 72);
+  h = new Hero(48,48,width/2-24,height - 72);
   coolDown = 0;
   ListOfWalls = new ArrayList<Wall>();
   ListOfMovableWalls = new ArrayList<MovableWall>();
@@ -60,21 +47,21 @@ void setup() {
   //for (int i = 0;i < a;i += 1) {
   //  Wall 
   ListOfRooms = new ArrayList<ArrayList<ArrayList<Wall>>>();
-  for (int i = 0; i < 6; i += 1) {
+  for (int i = 0;i < 6;i += 1) {
     ListOfRooms.add(new ArrayList<ArrayList<Wall>>());
     MovableRoomsList.add(new ArrayList<ArrayList<MovableWall>>());
-    for (int j = 0; j < 6; j += 1) {
+    for (int j = 0;j < 6;j += 1) {
       ListOfRooms.get(i).add(new ArrayList<Wall>());
       MovableRoomsList.get(i).add(new ArrayList<MovableWall>());
     }
   }
-  for (int i = 0; i < ListOfRooms.size(); i += 1) {
-    for (int j = 0; j < ListOfRooms.get(i).size(); j += 1) {
-      for (int k = 0; k < WallsInput[i*6 + j].length; k += 2) {
-        ListOfRooms.get(i).get(j).add(new Wall(WallsInput[i*6 + j][k], WallsInput[i*6 + j][k+1]));
+  for (int i = 0;i < ListOfRooms.size();i += 1) {
+    for (int j = 0;j < ListOfRooms.get(i).size();j += 1) {
+      for (int k = 0;k < WallsInput[i*6 + j].length;k += 2) {
+        ListOfRooms.get(i).get(j).add(new Wall(WallsInput[i*6 + j][k],WallsInput[i*6 + j][k+1]));
       }
       if (MovableWallsInput[i*6+j].length > 0) {
-        MovableRoomsList.get(i).get(j).add(new MovableWall(MovableWallsInput[i*6+j][0], MovableWallsInput[i*6+j][1]));
+        MovableRoomsList.get(i).get(j).add(new MovableWall(MovableWallsInput[i*6+j][0],MovableWallsInput[i*6+j][1]));
       }
     }
   }
@@ -85,6 +72,7 @@ void setup() {
 
 void draw() {
   ListOfWalls = ListOfRooms.get(roomY).get(roomX);
+  ListOfMovableWalls = MovableRoomsList.get(roomY).get(roomX);
   background(255);
   //fill(255,0,0);
   //rect(72,72,144,144);
@@ -96,67 +84,209 @@ void draw() {
   }
   if (coolDown > 0) {
     coolDown -= 1;
-    hero.x += hero.slowMoveX;
-    hero.y += hero.slowMoveY;
+    h.x += h.slowMoveX;
+    h.y += h.slowMoveY;
   }
-  if (movingWall != null && movingWall.coolDown > 0) {
-    movingWall.coolDown -= 1;
-    movingWall.changeXCor(movingWall.slowMoveX);
-    movingWall.changeYCor(movingWall.slowMoveY);
-    if (movingWall.coolDown == 0) {
-      movingWall = null;
+  h.move();
+  h.attack();
+  h.display();
+}
+
+
+
+public class Hero implements Fightable{
+  int Imgh,Imgw,x,y,hp,dmg,slowMoveX,slowMoveY;
+  char direction;
+  Hero(int he,int wi,int startx,int starty) {
+    Imgh = he;
+    Imgw = wi;
+    x = startx;
+    y = starty;
+    hp = 100;
+    dmg = 10;
+    direction = 'd';
+  }
+  
+  void display() {
+    fill(0,255,0);
+    rect(x,y,Imgh,Imgw);
+  }
+  
+  void takeDmg(int amount) {
+    hp -= amount;
+    if (hp < 0) {
+      hp = 0;
     }
   }
-  hero.move();
-  hero.attack();
-  hero.display();
-  showEnemies(); // displays all the Enemies
-  die();         // checks the list of enemies and removes them if they need to die
-  moveEnemies();
-  enemiesAttack();
-}
-
-void die() {
-  for ( int i = 0; i < Enemies.size(); i++) {
-    if (Enemies.get(i).die()) {
-      Enemies.remove(i);
-      i--;
+  
+  void attack() {
+    if(keyPressed && coolDown == 0) {
+      if (key == 'x' || key == 'X') {
+        //background(255,0,0);
+        //coolDown = 10;
+        if (direction == 'u') {
+          fill(255,0,0);
+          rect(x,y-48,48,48);
+        }
+        if (direction == 'l') {
+          fill(255,0,0);
+          rect(x-48,y,48,48);
+        }
+        if (direction == 'd') {
+          fill(255,0,0);
+          rect(x,y+48,48,48);
+        }
+        if (direction == 'r') {
+          fill(255,0,0);
+          rect(x+48,y,48,48);
+        }
+      }
     }
   }
-  for ( int i = 0; i < Fireballs.size(); i++) {
-    if ( Fireballs.get(i).time > 0) {
-      Fireballs.get(i).time -= 1;
-    } else {
-      Fireballs.remove(i);
-      i--;
+  
+  
+  void move() {
+  if (keyPressed && coolDown == 0) {
+    if ((key == 'W' || key == 'w') && y - Imgh/2 > 0) {
+      direction = 'u';
+      boolean canMove = true;
+      for (Wall w : ListOfWalls) {
+        if (x/48 == w.x && y/48 - 1 == w.y) {
+          canMove = false;
+        }
+      }
+      for (int i = 0;i < ListOfMovableWalls.size();i += 1) {
+        if (x/48 == ListOfMovableWalls.get(i).x && y/48 - 1 == ListOfMovableWalls.get(i).y) {
+          ListOfMovableWalls.get(i).y -= 1;
+        }
+      }
+      if (canMove) {
+        //y -= 48;
+        slowMoveX = 0;
+        slowMoveY = -6;
+        coolDown = 8;
+      }
+    }
+    if ((key == 'W' || key == 'w') && y - Imgh/2 == 0) {
+      direction = 'u';
+      roomY -= 1;
+      y = height - 24;
+      coolDown = 8;
+      slowMoveX = 0;
+      slowMoveY = 0;
+    }
+    if ((key == 'A' || key == 'a') && x - Imgw/2 > 0) {
+      direction = 'l';
+      boolean canMove = true;
+      for (Wall w : ListOfWalls) {
+        if (x/48 - 1 == w.x && y/48 == w.y) {
+          canMove = false;
+        }
+      }
+      if (canMove) {
+        //x -= 48;
+        slowMoveX = -6;
+        slowMoveY = 0;        
+        coolDown = 8;
+      }
+    }
+    if ((key == 'A' || key == 'a') && x - Imgw/2 == 0) {
+      direction = 'l';
+      roomX -= 1;
+      x = width - 24;
+      coolDown = 8;
+      slowMoveX = 0;
+      slowMoveY = 0;
+    }
+    if ((key == 'S' || key == 's') && y + Imgh/2 < height) {
+      direction  = 'd';
+      boolean canMove = true;
+      for (Wall w : ListOfWalls) {
+        if (x/48 == w.x && y/48 + 1 == w.y) {
+          canMove = false;
+        }
+      }
+      if (canMove) {
+        //y += 48;
+        slowMoveX = 0;
+        slowMoveY = 6;
+        coolDown = 8;
+      }
+    }
+    if ((key == 'S' || key == 's') && y + Imgh/2 == height) {
+      direction = 'd';
+      roomY += 1;
+      y = 24;
+      coolDown = 8;
+      slowMoveX = 0;
+      slowMoveY = 0;
+    }
+    if ((key == 'D' || key == 'd') && x + Imgw/2 < width) {
+      direction = 'r';
+      boolean canMove = true;
+      for (Wall w : ListOfWalls) {
+        if (x/48 + 1 == w.x && y/48== w.y) {
+          canMove = false;
+        }
+      }
+      if (canMove) {
+        //x += 48;
+        slowMoveX = 6;
+        slowMoveY = 0;
+        coolDown = 8;
+      }
+    }
+    if ((key == 'D' || key == 'd') && x + Imgh/2 == width) {
+      direction = 'r';
+      roomX += 1;
+      x = 24;
+      coolDown = 8;
+      slowMoveX = 0;
+      slowMoveY = 0;
     }
   }
+}  
+
+  
 }
 
-void showEnemies() {
-  for ( int i = 0; i < Enemies.size(); i++) {
-    Enemies.get(i).display();
+public interface Fightable{
+  void takeDmg(int amount);
+  void attack();
+  void move();
+}
+
+public class Wall{ 
+  int x,y;
+  
+  Wall(int xCor,int yCor) {
+    x = xCor;
+    y = yCor;
   }
-  for (int i = 0; i < Fireballs.size(); i++) {
-    Fireballs.get(i).display();
+  
+  void display() {
+    fill(0,0,255);
+    rect(48*x+24,48*y+24,48,48);
   }
 }
 
-
-void moveEnemies() {
-  for ( int i =0; i < Enemies.size(); i++) {
-    Enemies.get(i).move();
+public class MovableWall extends Wall{ 
+  int x,y;
+  
+  
+  MovableWall(int xCor,int yCor) {
+    super(xCor,yCor);
+    x = xCor;
+    y = yCor;
   }
-  for ( int i = 0; i < Fireballs.size(); i++) {
-    Fireballs.get(i).move();
+  
+  void changeXCor(int delta) {
+    x += delta;
   }
-}
-
-void enemiesAttack() {
-  for ( int i = 0; i < Enemies.size(); i++) {
-    Enemies.get(i).attack();
+  
+  void changeYCor(int delta) {
+    y += delta;
   }
-  for( int i = 0; i < Fireballs.size(); i++){
-    Fireballs.get(i).collide();
-  }  
+  
+  
 }
