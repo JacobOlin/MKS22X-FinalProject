@@ -160,7 +160,7 @@ public class Fireball {
   PImage image;
 
   public void collide() {
-    if((float)hero.x + size > x && (float)hero.x - size < x && (float)hero.y + size > y && (float)hero.y - size < y){
+    if(hero.x + size * 2 > x && hero.x - size * 2 < x && hero.y + size * 2 > y && hero.y - size * 2 < y){
       hero.takeDamage(1);
       time = 0;
     }
@@ -183,7 +183,7 @@ public class Fireball {
   }
   
   void display(){
-    //println(time);
+    println(time);
     //print("" + x +  ""  + y);;
     image(image,x,y,size,size);
   }

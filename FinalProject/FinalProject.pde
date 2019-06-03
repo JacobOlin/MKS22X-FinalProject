@@ -125,7 +125,7 @@ void die() {
     }
   }
   for ( int i = 0; i < Fireballs.size(); i++) {
-    if ( Fireballs.get(i).time >= 0) {
+    if ( Fireballs.get(i).time > 0) {
       Fireballs.get(i).time -= 1;
     } else {
       Fireballs.remove(i);
