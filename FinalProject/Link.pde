@@ -65,6 +65,11 @@ public class Hero implements Fightable{
             canMove = false;
           }
         }
+        for (LockedDoor d: ListOfDoors) {
+          if (x/48 == d.x && y/48 - 1 == d.y && d.isLocked) {
+            canMove = false;
+          }
+        }
         boolean canMoveWall = true;
         boolean nextToWall = false;
         for (MovableWall w : ListOfMovableWalls) {
@@ -114,6 +119,11 @@ public class Hero implements Fightable{
             canMove = false;
           }
         }
+        for (LockedDoor d: ListOfDoors) {
+          if (x/48 - 1 == d.x && y/48 == d.y && d.isLocked) {
+            canMove = false;
+          }
+        }
         boolean canMoveWall = true;
         boolean nextToWall = false;
         for (MovableWall w : ListOfMovableWalls) {
@@ -159,6 +169,11 @@ public class Hero implements Fightable{
             canMove = false;
           }
         }
+        for (LockedDoor d: ListOfDoors) {
+          if (x/48 == d.x && y/48 + 1 == d.y && d.isLocked) {
+            canMove = false;
+          }
+        }
         boolean canMoveWall = true;
         boolean nextToWall = false;
         for (MovableWall w : ListOfMovableWalls) {
@@ -201,6 +216,11 @@ public class Hero implements Fightable{
         boolean canMove = true;
         for (Wall w : ListOfWalls) {
           if (x/48 + 1 == w.x && y/48== w.y) {
+            canMove = false;
+          }
+        }
+        for (LockedDoor d: ListOfDoors) {
+          if (x/48 + 1 == d.x && y/48 == d.y && d.isLocked) {
             canMove = false;
           }
         }

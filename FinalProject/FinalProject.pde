@@ -99,6 +99,7 @@ void draw() {
   } else {
     //println(hero.hp);
     ListOfWalls = ListOfRooms.get(roomY).get(roomX);
+    ListOfDoors = ListOfDoorsRooms.get(roomY).get(roomX);
     background(255);
     //fill(255,0,0);
     //rect(72,72,144,144);
