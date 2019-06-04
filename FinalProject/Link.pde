@@ -1,5 +1,5 @@
 public class Hero implements Fightable{
-  int Imgh,Imgw,x,y,hp,dmg,slowMoveX,slowMoveY;
+  int Imgh,Imgw,x,y,hp,dmg,slowMoveX,slowMoveY,arrows;
   char direction;
   Hero(int he,int wi,int startx,int starty) {
     Imgh = he;
@@ -9,6 +9,7 @@ public class Hero implements Fightable{
     hp = 15;
     dmg = 2;
     direction = 'd';
+    arrows = 20;
   }
   
   void display() {
@@ -59,8 +60,9 @@ public class Hero implements Fightable{
   }
   
   void bow(){
-    if (keyPressed && coolDown == 0) {
+    if (keyPressed && coolDown == 0 && arrows > 0) {
       if (key == 'c' || key == 'C') {
+        arrows -=1;
         //background(255,0,0);
         //coolDown = 10;
         if (direction == 'u') {
