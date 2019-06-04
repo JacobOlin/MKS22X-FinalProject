@@ -3,6 +3,7 @@ Hero hero;
 Enemies u, d, l, r;
 ArrayList<Enemies> Enemies;
 ArrayList<Fireball> Fireballs;
+ArrayList<Arrow> Arrows;
 ArrayList<Wall> ListOfWalls;
 int roomX = 2;
 int roomY = 5;
@@ -41,7 +42,7 @@ int[][] WallsInput = {{},
 
 int[][] MovableWallsInput = {{}, {6, 5}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {7, 5}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}};
 
-int[][] LockedDoorsInput = {{},{},{1,5},{},{},{},{},{},{7,1,8,1},{},{},{},{},{},{14,5},{},{7,1,8,1},{},{},{7,1,8,1},{},{},{},{},{},{},{},{},{},{},{},{},{7,1,8,1},{},{},{}};
+int[][] LockedDoorsInput = {{}, {}, {1, 5}, {}, {}, {}, {}, {}, {7, 1, 8, 1}, {}, {}, {}, {}, {}, {14, 5}, {}, {7, 1, 8, 1}, {}, {}, {7, 1, 8, 1}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {7, 1, 8, 1}, {}, {}, {}};
 
 void setup() {
   size(768, 528);
@@ -49,6 +50,7 @@ void setup() {
   rectMode(CENTER);
   Enemies = new ArrayList<Enemies>();
   Fireballs = new ArrayList<Fireball>();
+  Arrows = new ArrayList<Arrow>();
   d = new Tektite(48, 48, width/2 -24, height - 72);
   u = new Aquamentus(48, 48, width/2-24, height - 72);
   l = new Peahat(48, 48, width/2-24, height -72);
@@ -69,10 +71,10 @@ void setup() {
   //  Wall 
   ListOfRooms = new ArrayList<ArrayList<ArrayList<Wall>>>();
   ListOfDoorsRooms = new ArrayList<ArrayList<ArrayList<LockedDoor>>>();
-  for (int i = 0;i < 6;i += 1) {
+  for (int i = 0; i < 6; i += 1) {
     ListOfRooms.add(new ArrayList<ArrayList<Wall>>());
     ListOfDoorsRooms.add(new ArrayList<ArrayList<LockedDoor>>());
-    for (int j = 0;j < 6;j += 1) {
+    for (int j = 0; j < 6; j += 1) {
       ListOfRooms.get(i).add(new ArrayList<Wall>());
       ListOfDoorsRooms.get(i).add(new ArrayList<LockedDoor>());
       if (WallsInput[i*6+j].length > 0) {
@@ -85,8 +87,8 @@ void setup() {
       for (int k = 0; k < WallsInput[i*6 + j].length; k += 2) {
         ListOfRooms.get(i).get(j).add(new Wall(WallsInput[i*6 + j][k], WallsInput[i*6 + j][k+1]));
       }
-      for (int k = 0;k < LockedDoorsInput[i*6+j].length;k += 2) {
-        ListOfDoorsRooms.get(i).get(j).add(new LockedDoor(LockedDoorsInput[i*6+j][k],LockedDoorsInput[i*6+j][k+1]));
+      for (int k = 0; k < LockedDoorsInput[i*6+j].length; k += 2) {
+        ListOfDoorsRooms.get(i).get(j).add(new LockedDoor(LockedDoorsInput[i*6+j][k], LockedDoorsInput[i*6+j][k+1]));
       }
     }
   }
@@ -97,11 +99,10 @@ void setup() {
 
 void draw() {
   if ( hero.hp <= 0) {
-    image(gameover, 0, 0,width, height);
-    if(key == 'X' || key == 'x'){
+    image(gameover, 0, 0, width, height);
+    if (key == 'X' || key == 'x') {
       setup();
     }
-      
   } else {
     //println(hero.hp);
     ListOfWalls = ListOfRooms.get(roomY).get(roomX);
@@ -130,8 +131,13 @@ void draw() {
         movingWall = null;
       }
     }
+    fill(0,0,0);
+    textSize(25);
+    text("Arrows : " + hero.arrows, 30, 30);
+    text("Health : " + hero.hp, 30, 55);
     hero.move();
     hero.attack();
+    hero.bow();
     hero.display();
     showEnemies(); // displays all the Enemies
     die();         // checks the list of enemies and removes them if they need to die
@@ -155,6 +161,14 @@ void die() {
       i--;
     }
   }
+  for ( int i = 0; i < Arrows.size(); i++) {
+    if ( Arrows.get(i).time > 0) {
+      Arrows.get(i).time -= 1;
+    } else {
+      Arrows.remove(i);
+      i--;
+    }
+  }
 }
 
 void showEnemies() {
@@ -163,6 +177,9 @@ void showEnemies() {
   }
   for (int i = 0; i < Fireballs.size(); i++) {
     Fireballs.get(i).display();
+  }
+  for (int i = 0; i < Arrows.size(); i++) {
+    Arrows.get(i).display();
   }
 }
 
@@ -174,6 +191,9 @@ void moveEnemies() {
   for ( int i = 0; i < Fireballs.size(); i++) {
     Fireballs.get(i).move();
   }
+  for ( int i = 0; i < Arrows.size(); i++) {
+    Arrows.get(i).move();
+  }
 }
 
 void enemiesAttack() {
@@ -183,31 +203,32 @@ void enemiesAttack() {
   for ( int i = 0; i < Fireballs.size(); i++) {
     Fireballs.get(i).collide();
   }
-  
-  
+  for ( int i = 0; i < Arrows.size(); i++) {
+    Arrows.get(i).collide();
+  }
 }
 
-public class LockedDoor{
-  int x,y;
+public class LockedDoor {
+  int x, y;
   boolean isLocked;
-  
-  public LockedDoor(int xCor,int yCor) {
+
+  public LockedDoor(int xCor, int yCor) {
     x = xCor;
     y = yCor;
     isLocked = true;
   }
-  
+
   public void unlock() {
     isLocked = false;
-    for (LockedDoor d: ListOfDoors) {
+    for (LockedDoor d : ListOfDoors) {
       if (abs(x - d.x) <= 1 && abs(y - d.y) <= 1 && d.isLocked) {
         d.unlock();
       }
     }
   }
-  
+
   public void display() {
-    fill(127,0,127);
-    rect(48*x+24,48*y+24,48,48);
+    fill(127, 0, 127);
+    rect(48*x+24, 48*y+24, 48, 48);
   }
 }
