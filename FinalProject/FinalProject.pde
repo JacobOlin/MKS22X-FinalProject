@@ -3,6 +3,7 @@ Hero hero;
 Enemies u, d, l, r;
 ArrayList<Enemies> Enemies;
 ArrayList<Fireball> Fireballs;
+ArrayList<Arrow> Arrows;
 ArrayList<Wall> ListOfWalls;
 int roomX = 2;
 int roomY = 5;
@@ -47,6 +48,7 @@ void setup() {
   rectMode(CENTER);
   Enemies = new ArrayList<Enemies>();
   Fireballs = new ArrayList<Fireball>();
+  Arrows = new ArrayList<Arrow>();
   d = new Tektite(48, 48, width/2 -24, height - 72);
   u = new Aquamentus(48, 48, width/2-24, height - 72);
   l = new Peahat(48, 48, width/2-24, height -72);
@@ -124,6 +126,7 @@ void draw() {
     }
     hero.move();
     hero.attack();
+    hero.bow();
     hero.display();
     showEnemies(); // displays all the Enemies
     die();         // checks the list of enemies and removes them if they need to die
@@ -147,6 +150,14 @@ void die() {
       i--;
     }
   }
+  for ( int i = 0; i < Arrows.size(); i++) {
+    if ( Arrows.get(i).time > 0) {
+      Arrows.get(i).time -= 1;
+    } else {
+      Arrows.remove(i);
+      i--;
+    }
+  }
 }
 
 void showEnemies() {
@@ -155,6 +166,9 @@ void showEnemies() {
   }
   for (int i = 0; i < Fireballs.size(); i++) {
     Fireballs.get(i).display();
+  }
+  for (int i = 0; i < Arrows.size(); i++) {
+    Arrows.get(i).display();
   }
 }
 
@@ -166,6 +180,9 @@ void moveEnemies() {
   for ( int i = 0; i < Fireballs.size(); i++) {
     Fireballs.get(i).move();
   }
+  for ( int i = 0; i < Arrows.size(); i++) {
+    Arrows.get(i).move();
+  }
 }
 
 void enemiesAttack() {
@@ -174,6 +191,9 @@ void enemiesAttack() {
   }
   for ( int i = 0; i < Fireballs.size(); i++) {
     Fireballs.get(i).collide();
+  }
+  for ( int i = 0; i < Arrows.size(); i++) {
+    Arrows.get(i).collide();
   }
   
   

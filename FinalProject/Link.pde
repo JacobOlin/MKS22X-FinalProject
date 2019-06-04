@@ -57,7 +57,25 @@ public class Hero implements Fightable{
       }
     }
   }
-
+  
+  void bow(){
+    if (keyPressed && coolDown == 0) {
+      if (key == 'c' || key == 'C') {
+        //background(255,0,0);
+        //coolDown = 10;
+        if (direction == 'u') {
+          Arrows.add( new Arrow( x * 1.0, y * 1.0, 0.0, .8, loadImage("ArrowU.jpg")));
+        } 
+        if (direction == 'l') {
+          
+        }
+        if (direction == 'd') {
+        }
+        if (direction == 'r') {
+        }
+      }
+    }
+  }
 
   void move() {
     if (keyPressed && coolDown == 0) {
@@ -330,3 +348,48 @@ public class Hero implements Fightable{
     }
   }
 }
+
+public class Arrow{
+  int damage;
+  float x;
+  float y;
+  float xspeed;
+  float yspeed;
+  int size;
+  int time;
+  PImage image;
+  
+  
+  public void collide(){
+    for( int i = 0; i < Enemies.size(); i++){
+      Enemies e = Enemies.get(i);
+      if (e.x + size * 2 > x && e.x - size * 2 < x && e.y + size * 2 > y && e.y - size * 2 < y) {
+        e.takeDamage(1);
+        time = 0;
+      }
+    }
+  }
+  
+  public void move(){
+    x += xspeed;
+    y += yspeed;
+  }
+  
+  public Arrow(float x, float y, float xspeed, float yspeed, PImage image){
+    this.x = x;
+    this.y =y;
+    this.xspeed = xspeed;
+    this.yspeed = yspeed;
+    time = 100;
+    size = 20;
+    this.image = image;
+  }
+  
+  public void display(){
+    image(image, x, y, size, size);
+  }
+}
+  
+  
+  
+  
