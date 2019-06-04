@@ -126,6 +126,7 @@ void draw() {
     fill(0,0,0);
     textSize(25);
     text("Arrows : " + hero.arrows, 30, 30);
+    text("Health : " + hero.hp, 30, 55);
     hero.move();
     hero.attack();
     hero.bow();
