@@ -8,6 +8,7 @@ int roomX = 2;
 int roomY = 5;
 PImage gameover; 
 MovableWall movingWall;
+PImage[][] backgrounds = new PImage[6][6];
 ArrayList<ArrayList<ArrayList<LockedDoor>>> ListOfDoorsRooms;
 ArrayList<LockedDoor> ListOfDoors;
 ArrayList<ArrayList<ArrayList<Wall>>> ListOfRooms;
@@ -72,6 +73,9 @@ void setup() {
     for (int j = 0;j < 6;j += 1) {
       ListOfRooms.get(i).add(new ArrayList<Wall>());
       ListOfDoorsRooms.get(i).add(new ArrayList<LockedDoor>());
+      if (WallsInput[i*6+j].length > 0) {
+        backgrounds[i][j] = loadImage("Map" + i + "" + j + ".png");
+      }
     }
   }
   for (int i = 0; i < ListOfRooms.size(); i += 1) {
