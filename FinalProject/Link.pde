@@ -64,14 +64,16 @@ public class Hero implements Fightable{
         //background(255,0,0);
         //coolDown = 10;
         if (direction == 'u') {
-          Arrows.add( new Arrow( x * 1.0, y * 1.0, 0.0, .8, loadImage("ArrowU.jpg")));
+          Arrows.add( new Arrow( x * 1.0, y * 1.0, 0.0, -3.0, loadImage("ArrowU.jpg")));
         } 
         if (direction == 'l') {
-          
+          Arrows.add( new Arrow( x * 1.0, y * 1.0, -3.0, 0.0, loadImage("ArrowL.jpg")));
         }
         if (direction == 'd') {
+          Arrows.add( new Arrow( x * 1.0, y * 1.0, 0.0, 3.0, loadImage("ArrowD.jpg")));
         }
         if (direction == 'r') {
+          Arrows.add( new Arrow( x * 1.0, y * 1.0, 3.0, 0.0, loadImage("ArrowR.jpg")));
         }
       }
     }
@@ -380,7 +382,7 @@ public class Arrow{
     this.y =y;
     this.xspeed = xspeed;
     this.yspeed = yspeed;
-    time = 100;
+    time = 30;
     size = 20;
     this.image = image;
   }
