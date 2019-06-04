@@ -104,12 +104,13 @@ void draw() {
     //println(hero.hp);
     ListOfWalls = ListOfRooms.get(roomY).get(roomX);
     ListOfDoors = ListOfDoorsRooms.get(roomY).get(roomX);
-    background(255);
+    //background(255);
+    image(backgrounds[roomY][roomX],0,0,width,height);
     //fill(255,0,0);
     //rect(72,72,144,144);
-    for (Wall w : ListOfWalls) {
-      w.display();
-    }
+    //for (Wall w : ListOfWalls) {
+    //  w.display();
+    //}
     for (MovableWall w : ListOfMovableWalls) {
       w.display();
     }
