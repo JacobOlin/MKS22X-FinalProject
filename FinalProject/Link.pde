@@ -32,23 +32,27 @@ public class Hero implements Fightable{
           fill(255, 0, 0);
           rect(x, y-48, 48, 48);
           dealDamage(Enemies);
+          unlockDoor(ListOfDoors);
         }
         if (direction == 'l') {
           fill(255, 0, 0);
           rect(x-48, y, 48, 48);
           //println("left");;
           dealDamage(Enemies);
+          unlockDoor(ListOfDoors);
         }
         if (direction == 'd') {
           fill(255, 0, 0);
           rect(x, y+48, 48, 48);
           // check to see if there is an enemy in the attack range
           dealDamage(Enemies);
+          unlockDoor(ListOfDoors);
         }
         if (direction == 'r') {
           fill(255, 0, 0);
           rect(x+48, y, 48, 48);
           dealDamage(Enemies);
+          unlockDoor(ListOfDoors);
         }
       }
     }
@@ -290,6 +294,37 @@ public class Hero implements Fightable{
       if ( direction == 'r') {
         if ( x <= e.x && x+ 48 >= e.x && y -24 <= e.y && y + 24 >= e.y) {
           e.takeDamage(dmg);
+        }
+      }
+    }
+  }
+  
+  void unlockDoor(ArrayList<LockedDoor> List) {
+    for (int i = 0; i < List.size(); i++) {
+      LockedDoor d = List.get(i);
+
+      if (direction == 'd') {
+        if (x/48 == d.x && y/48 + 1 == d.y) {
+          d.unlock();
+        }
+      }
+
+      if ( direction == 'u') {
+        if (x/48 == d.x && y/48 - 1 == d.y)
+        {
+          d.unlock();
+        }
+      }
+
+      if ( direction == 'l') {
+        if (x/48 - 1 == d.x && y/48 == d.y) {
+          d.unlock();
+        }
+      }
+
+      if ( direction == 'r') {
+        if (x/48 + 1 == d.x && y/48 == d.y) {
+          d.unlock();
         }
       }
     }
