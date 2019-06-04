@@ -7,6 +7,7 @@ ArrayList<Wall> ListOfWalls;
 int roomX = 2;
 int roomY = 5;
 PImage gameover; 
+PImage bricks;
 MovableWall movingWall;
 PImage[][] backgrounds = new PImage[6][6];
 ArrayList<ArrayList<ArrayList<LockedDoor>>> ListOfDoorsRooms;
@@ -57,6 +58,7 @@ void setup() {
   Enemies.add(l);
   Fireballs.add(f);
   gameover = loadImage("gameover.png");
+  bricks = loadImage("bricks.png");
   hero = new Hero(48, 48, width/2 + 24, height - 72);
   coolDown = 0;
   ListOfWalls = new ArrayList<Wall>();
@@ -105,11 +107,12 @@ void draw() {
     ListOfWalls = ListOfRooms.get(roomY).get(roomX);
     ListOfDoors = ListOfDoorsRooms.get(roomY).get(roomX);
     //background(255);
-    image(backgrounds[roomY][roomX],0,0,width,height);
+    image(backgrounds[roomY][roomX],0,0,width,height-24);
+    image(bricks,0,height - 24,width,120);
     //fill(255,0,0);
     //rect(72,72,144,144);
     //for (Wall w : ListOfWalls) {
-    //  w.display();
+      //w.display();
     //}
     for (MovableWall w : ListOfMovableWalls) {
       w.display();
