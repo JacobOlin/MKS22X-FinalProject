@@ -19,8 +19,9 @@ public class MovableWall /*extends Wall*/{
   }
   
   void display() {
-    fill(0,0,255);
-    rect(48*x+24,48*y+24,48,48);
+    //fill(0,0,255);
+    //rect(48*x+24,48*y+24,48,48);
+    image(movablewall,x*48,y*48,48,48);
   }
   
   
