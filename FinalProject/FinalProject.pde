@@ -184,9 +184,11 @@ void draw() {
       
     fill(0, 0, 0);
     textSize(25);
-    text("Arrows : " + hero.arrows, 30, 30);
-    text("Health : " + hero.hp, 30, 55);
-    text("Keys : " + hero.keys,30,80);
+    if (canShoot) {
+      text("Arrows : " + hero.arrows, 30, 80);
+    }
+    text("Health : " + hero.hp, 30, 30);
+    text("Keys : " + hero.keys,30,55);
     hero.move();
     hero.attack();
     if (canShoot) {
