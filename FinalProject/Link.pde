@@ -1,6 +1,7 @@
 public class Hero implements Fightable{
   int Imgh,Imgw,x,y,hp,dmg,slowMoveX,slowMoveY,arrows,keys;
   char direction;
+  PImage right,rightAttack,left,leftAttack,up,upAttack,down,downAttack,current;
   Hero(int he,int wi,int startx,int starty) {
     Imgh = he;
     Imgw = wi;
@@ -8,14 +9,35 @@ public class Hero implements Fightable{
     y = starty;
     hp = 15;
     dmg = 2;
-    direction = 'd';
+    direction = 'u';
     arrows = 20;
-    keys = 0;
+    keys = 5;
+    right = loadImage("right.png");
+    rightAttack = loadImage("rightAttack.png");
+    left = loadImage("left.png");
+    leftAttack = loadImage("leftAttack.png");
+    up = loadImage("up.png");
+    upAttack = loadImage("upAttack.png");
+    down = loadImage("down.png");
+    downAttack = loadImage("downAttack.jpg");
   }
   
   void display() {
-    fill(0,255,0);
-    rect(x,y,Imgh,Imgw);
+    //fill(0,255,0);
+    //rect(x,y,Imgh,Imgw);
+    if (direction == 'u') {
+      current = up;
+    }
+    if (direction == 'd') {
+      current = down;
+    }
+    if (direction == 'l') {
+      current = left;
+    }
+    if (direction == 'r') {
+      current = right;
+    }
+    image(current,x-24,y-24,Imgh,Imgw);
   }
 
   void takeDamage(int amount) {
