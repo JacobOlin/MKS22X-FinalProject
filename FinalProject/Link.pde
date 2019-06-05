@@ -1,5 +1,6 @@
 public class Hero implements Fightable{
   int Imgh,Imgw,x,y,hp,dmg,slowMoveX,slowMoveY,arrows,keys;
+  int imgxchange,imgychange;
   char direction;
   PImage right,rightAttack,left,leftAttack,up,upAttack,down,downAttack,current;
   Hero(int he,int wi,int startx,int starty) {
@@ -20,24 +21,51 @@ public class Hero implements Fightable{
     upAttack = loadImage("upAttack.png");
     down = loadImage("down.png");
     downAttack = loadImage("downAttack.jpg");
+    imgxchange = 0;
+    imgychange = 0;
   }
   
   void display() {
     //fill(0,255,0);
     //rect(x,y,Imgh,Imgw);
-    if (direction == 'u') {
-      current = up;
+    if (keyPressed && coolDown == 0 && (key == 'x' || key == 'X')) {
+      int deltax = 0;
+      int deltay = 0;
+      if (direction == 'u') {
+        imgxchange = -36;
+        imgychange = 0;
+      }
+      if (direction == 'd') {
+        imgxchange = 0;
+        imgychange = 0;
+        deltax = 36;
+      }
+      if (direction == 'l') {
+        imgxchange = 0;
+        imgychange = -36;
+      }
+      if (direction == 'r') {
+        imgxchange = 0;
+        imgychange = 0;
+        deltay = 36;
+      }
+      image(current,x-24+imgychange,y-24+imgxchange,Imgh+abs(imgychange)+deltay,Imgw+abs(imgxchange)+deltax);
     }
-    if (direction == 'd') {
-      current = down;
+    else {
+      if (direction == 'u') {
+        current = up;
+      }
+      if (direction == 'd') {
+        current = down;
+      }
+      if (direction == 'l') {
+        current = left;
+      }
+      if (direction == 'r') {
+        current = right;
+      }
+      image(current,x-24,y-24,Imgh,Imgw);
     }
-    if (direction == 'l') {
-      current = left;
-    }
-    if (direction == 'r') {
-      current = right;
-    }
-    image(current,x-24,y-24,Imgh,Imgw);
   }
 
   void takeDamage(int amount) {
@@ -53,30 +81,34 @@ public class Hero implements Fightable{
         //background(255,0,0);
         //coolDown = 10;
         if (direction == 'u') {
-          fill(255, 0, 0);
-          rect(x, y-48, 48, 48);
+          //fill(255, 0, 0);
+          //rect(x, y-48, 48, 48);
           dealDamage(Enemies);
           unlockDoor(ListOfDoors);
+          current = upAttack;
         }
         if (direction == 'l') {
-          fill(255, 0, 0);
-          rect(x-48, y, 48, 48);
+          //fill(255, 0, 0);
+          //rect(x-48, y, 48, 48);
           //println("left");;
           dealDamage(Enemies);
           unlockDoor(ListOfDoors);
+          current = leftAttack;
         }
         if (direction == 'd') {
-          fill(255, 0, 0);
-          rect(x, y+48, 48, 48);
+          //fill(255, 0, 0);
+          //rect(x, y+48, 48, 48);
           // check to see if there is an enemy in the attack range
           dealDamage(Enemies);
           unlockDoor(ListOfDoors);
+          current = downAttack;
         }
         if (direction == 'r') {
-          fill(255, 0, 0);
-          rect(x+48, y, 48, 48);
+          //fill(255, 0, 0);
+          //rect(x+48, y, 48, 48);
           dealDamage(Enemies);
           unlockDoor(ListOfDoors);
+          current = rightAttack;
         }
       }
     }
