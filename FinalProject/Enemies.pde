@@ -110,9 +110,6 @@ public class Peahat extends Enemies {
     image = loadImage("peahat.png");
   }
 
-  public void attack() {
-  }
-
   public void takeDamage(int damage) {
     hp -= damage;
   }
@@ -140,7 +137,7 @@ public class Aquamentus extends Enemies {
   public void attack() { // spawns 3 fireballs 
     super.attack();
     float n = random(100);
-    if ( n > 97) {
+    if ( n > 98.5) {
       Fireballs.add(new Fireball(x, y, -.6, .6));
       Fireballs.add(new Fireball(x, y, -.6, 0));
       Fireballs.add(new Fireball(x, y, -.6, -.6));

@@ -15,6 +15,8 @@ ArrayList<ArrayList<ArrayList<LockedDoor>>> ListOfDoorsRooms;
 ArrayList<LockedDoor> ListOfDoors;
 ArrayList<ArrayList<ArrayList<Wall>>> ListOfRooms;
 ArrayList<MovableWall> ListOfMovableWalls;
+
+
 int[][] WallsInput = {{}, 
   {0, 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 1, 0, 1, 1, 1, 2, 1, 3, 1, 4, 1, 5, 1, 6, 1, 7, 1, 8, 1, 9, 1, 10, 2, 0, 2, 1, 2, 9, 2, 10, 3, 0, 3, 1, 3, 9, 3, 10, 4, 0, 4, 1, 4, 9, 4, 10, 5, 0, 5, 1, 5, 9, 5, 10, 6, 0, 6, 1, /*6,5,*/6, 9, 6, 10, 7, 0, 7, 1, 7, 4, 7, 6, 7, 9, 7, 10, 8, 0, 8, 1, 8, 3, 8, 7, 8, 9, 8, 10, 9, 0, 9, 1, 9, 4, 9, 6, 9, 9, 9, 10, 10, 0, 10, 1, 10, 5, 10, 9, 10, 10, 11, 0, 11, 1, 11, 9, 11, 10, 12, 0, 12, 1, 12, 9, 12, 10, 13, 0, 13, 1, 13, 9, 13, 10, 14, 0, 14, 1, 14, 2, 14, 3, 14, 4, 14, 6, 14, 7, 14, 8, 14, 9, 14, 10, 15, 0, 15, 1, 15, 2, 15, 3, 15, 4, 15, 6, 15, 7, 15, 8, 15, 9, 15, 10}, 
   {0, 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 1, 0, 1, 1, 1, 2, 1, 3, 1, 4, 1, 6, 1, 7, 1, 8, 1, 9, 1, 10, 2, 0, 2, 1, 2, 9, 2, 10, 3, 0, 3, 1, 3, 3, 3, 4, 3, 5, 3, 6, 3, 7, 3, 9, 3, 10, 4, 0, 4, 1, 4, 3, 4, 7, 4, 9, 4, 10, 5, 0, 5, 1, 5, 3, 5, 5, 5, 7, 5, 9, 5, 10, 6, 0, 6, 1, 6, 5, 6, 9, 6, 10, 7, 0, 7, 1, 7, 5, 8, 0, 8, 1, 8, 5, 9, 0, 9, 1, 9, 5, 9, 9, 9, 10, 10, 0, 10, 1, 10, 3, 10, 5, 10, 7, 10, 9, 10, 10, 11, 0, 11, 1, 11, 3, 11, 7, 11, 9, 11, 10, 12, 0, 12, 1, 12, 3, 12, 4, 12, 5, 12, 6, 12, 7, 12, 9, 12, 10, 13, 0, 13, 1, 13, 9, 13, 10, 14, 0, 14, 1, 14, 2, 14, 3, 14, 4, 14, 5, 14, 6, 14, 7, 14, 8, 14, 9, 14, 10, 15, 0, 15, 1, 15, 2, 15, 3, 15, 4, 15, 5, 15, 6, 15, 7, 15, 8, 15, 9, 15, 10}, 
@@ -51,14 +53,14 @@ void setup() {
   Enemies = new ArrayList<Enemies>();
   Fireballs = new ArrayList<Fireball>();
   Arrows = new ArrayList<Arrow>();
-  d = new Tektite(48, 48, width/2 -24, height - 72);
-  u = new Aquamentus(48, 48, width/2-24, height - 72);
-  l = new Peahat(48, 48, width/2-24, height -72);
-  Fireball f = new Fireball(20, 20, 1, 1);
-  Enemies.add(d);
-  Enemies.add(u);
-  Enemies.add(l);
-  Fireballs.add(f);
+  //d = new Tektite(48, 48, width/2 -24, height - 72);
+  //u = new Aquamentus(48, 48, width/2-24, height - 72);
+  //l = new Peahat(48, 48, width/2-24, height -72);
+  //Fireball f = new Fireball(20, 20, 1, 1);
+  ///Enemies.add(d);
+  //Enemies.add(u);
+  //Enemies.add(l);
+  //Fireballs.add(f);
   gameover = loadImage("gameover.png");
   bricks = loadImage("bricks.png");
   hero = new Hero(48, 48, width/2 + 24, height - 72);
@@ -102,18 +104,19 @@ void draw() {
     image(gameover, 0, 0, width, height);
     if (key == 'X' || key == 'x') {
       setup();
+      changeEnemies();
     }
   } else {
     //println(hero.hp);
     ListOfWalls = ListOfRooms.get(roomY).get(roomX);
     ListOfDoors = ListOfDoorsRooms.get(roomY).get(roomX);
     //background(255);
-    image(backgrounds[roomY][roomX],0,0,width,height-24);
-    image(bricks,0,height - 24,width,120);
+    image(backgrounds[roomY][roomX], 0, 0, width, height-24);
+    image(bricks, 0, height - 24, width, 120);
     //fill(255,0,0);
     //rect(72,72,144,144);
     //for (Wall w : ListOfWalls) {
-      //w.display();
+    //w.display();
     //}
     for (MovableWall w : ListOfMovableWalls) {
       w.display();
@@ -131,7 +134,7 @@ void draw() {
         movingWall = null;
       }
     }
-    fill(0,0,0);
+    fill(0, 0, 0);
     textSize(25);
     text("Arrows : " + hero.arrows, 30, 30);
     text("Health : " + hero.hp, 30, 55);
@@ -207,6 +210,65 @@ void enemiesAttack() {
     Arrows.get(i).collide();
   }
 }
+
+void changeEnemies() {
+  //println("called");
+  //println("roomX : " + roomX);
+  //println("roomY : " + roomY);
+  Enemies.clear();
+  Fireballs.clear();
+  Arrows.clear();
+  if ( roomX == 1 && roomY == 5) {
+    Enemies.add(new Tektite(48, 48, width /2 - 24, height  /2 ));
+    Enemies.add(new Tektite(48, 48, width /2 + 24, height / 2 +  48));
+    Enemies.add(new Tektite(48, 48, 192, height /2 - 48 ));
+  }
+  if ( roomX == 3 && roomY == 5) {
+    Enemies.add(new Peahat(48, 48, width /2 + 24, height /2 + 48));
+    Enemies.add(new Peahat(48, 48, width /2 + 24, height /2 - 48));
+    Enemies.add(new Tektite(48, 48, 624, height /2));
+  }
+  if ( roomX == 2 && roomY == 4) {
+    Enemies.add(new Tektite(48, 48, width /2 - 72, height /2 + 48));
+    Enemies.add(new Peahat(48, 48, width /2 - 120, height /2 - 48));
+    Enemies.add(new Tektite(48, 48, width /2 -  216, height /2));
+    
+  }
+  if ( roomX == 2 && roomY == 3) {
+    Enemies.add(new Tektite(48, 48, width /2 - 24, height /2 + 48));
+    Enemies.add(new Peahat(48, 48, width /2 - 24, height /2 - 48));
+    Enemies.add(new Tektite(48, 48, width /2 -  168, height /2));
+    Enemies.add(new Tektite(48, 48, width /2  + 168, height /2 + 48));
+    Enemies.add(new Tektite(48, 48, width /2 -  216, height /2));
+  }
+  if ( roomX == 1 && roomY ==3) {
+    Enemies.add(new Peahat(48, 48, 240 /2 + 24, height /2 + 48));
+    Enemies.add(new Peahat(48, 48, 288, height /2 - 48));
+    Enemies.add(new Tektite(48, 48, 240, height /2));
+  }
+  if ( roomX == 3 && roomY == 3) {
+    Enemies.add(new Tektite(48, 48, width /2 - 24, height /2 + 48));
+    Enemies.add(new Peahat(48, 48, width /2 - 24, height /2 - 48));
+    Enemies.add(new Peahat(48, 48, width /2 -  168, height /2));
+    Enemies.add(new Peahat(48, 48, width /2  + 168, height /2 + 48));
+    Enemies.add(new Tektite(48, 48, width /2 -  216, height /2));
+  }
+  if ( roomX == 4 && roomY ==2) {
+    Enemies.add(new Peahat(48, 48, 624, height /2 + 48));
+    Enemies.add(new Peahat(48, 48, 624, height /2 - 48));
+  }
+  if ( roomX == 1 && roomY == 2) {
+    Enemies.add(new Peahat(48, 48, width /2 - 24, height /2 + 48));
+    Enemies.add(new Peahat(48, 48, width /2 - 24, height /2 - 48));
+    Enemies.add(new Tektite(48, 48, width /2 -  168, height /2));
+    Enemies.add(new Peahat(48, 48, width /2  + 168, height /2 + 48));
+    Enemies.add(new Tektite(48, 48, width /2 -  216, height /2));
+  }
+  if ( roomX == 4 && roomY == 1) {
+    Enemies.add(new Aquamentus(48, 48, 624, height /2));
+  }
+}
+
 
 public class LockedDoor {
   int x, y;

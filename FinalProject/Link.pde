@@ -136,6 +136,7 @@ public class Hero implements Fightable{
         if (MovableWallsInput[roomY*6+roomX].length > 0) {
           ListOfMovableWalls.add(new MovableWall(MovableWallsInput[roomY*6+roomX][0], MovableWallsInput[roomY*6+roomX][1]));
         }
+       changeEnemies();
       }
       if ((key == 'A' || key == 'a') && x - Imgw/2 > 48) {
         direction = 'l';
@@ -186,6 +187,7 @@ public class Hero implements Fightable{
         if (MovableWallsInput[roomY*6+roomX].length > 0) {
           ListOfMovableWalls.add(new MovableWall(MovableWallsInput[roomY*6+roomX][0], MovableWallsInput[roomY*6+roomX][1]));
         }
+        changeEnemies();
       }
       if ((key == 'S' || key == 's') && y + Imgh/2 < height - 48) {
         direction  = 'd';
@@ -236,6 +238,7 @@ public class Hero implements Fightable{
         if (MovableWallsInput[roomY*6+roomX].length > 0) {
           ListOfMovableWalls.add(new MovableWall(MovableWallsInput[roomY*6+roomX][0], MovableWallsInput[roomY*6+roomX][1]));
         }
+        changeEnemies();
       }
       if ((key == 'D' || key == 'd') && x + Imgw/2 < width - 48) {
         direction = 'r';
@@ -286,6 +289,7 @@ public class Hero implements Fightable{
         if (MovableWallsInput[roomY*6+roomX].length > 0) {
           ListOfMovableWalls.add(new MovableWall(MovableWallsInput[roomY*6+roomX][0], MovableWallsInput[roomY*6+roomX][1]));
         }
+        changeEnemies();
       }
     }
   }
