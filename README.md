@@ -1,6 +1,10 @@
 # MKS22X-FinalProject
 
-Dev Log:
+##Project description
+
+For our Final Project, we recreated the first dungeon from the game, The Legend of Zelda. In this recreation, we made several enemey types, different ways to attack, the standard sword and the long range bow, and keeping with the rogue-like genre, multilple rooms to explore. To run our program, open the finalproject.pde file in processing and click run.
+
+##Dev Log:
 
 5/20/19:<br/>
   Jacob- Started to work on allowing the player to move around. Also added a cool down on move so that the player doesn't move too quickly. Also created the class walls. They show up but don't do anything.<br/>
