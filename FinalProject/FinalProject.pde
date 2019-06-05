@@ -10,6 +10,7 @@ int roomY = 5;
 PImage gameover; 
 PImage bricks;
 PImage bowImage;
+PImage triforceImage;
 MovableWall movingWall;
 PImage[][] backgrounds = new PImage[6][6];
 ArrayList<ArrayList<ArrayList<LockedDoor>>> ListOfDoorsRooms;
@@ -363,5 +364,19 @@ public class Bow {
   }
   public void display() {
     image(bowImage,x,y,48,48);
+  }
+}
+
+public class Triforce {
+  int x;
+  int y;
+  
+  public Triforce() {
+    x = 7*48 + 24;
+    y = 5*48;
+  }
+  
+  public void display() {
+    image(triforceImage,x,y,48,48);
   }
 }
