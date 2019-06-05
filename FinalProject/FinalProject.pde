@@ -292,6 +292,9 @@ void changeEnemies() {
   if ( roomX == 4 && roomY == 1) {
     Enemies.add(new Aquamentus(48, 48, 624, height /2));
   }
+  if ( roomX == 2 && roomY == 0) {
+    Enemies.add(new Tektite(48, 48, width/2-24, 144));
+  }
 }
 
 

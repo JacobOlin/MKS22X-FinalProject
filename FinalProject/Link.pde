@@ -12,7 +12,7 @@ public class Hero implements Fightable{
     dmg = 2;
     direction = 'u';
     arrows = 20;
-    keys = 5;
+    keys = 0;
     right = loadImage("right.png");
     rightAttack = loadImage("rightAttack.png");
     left = loadImage("left.png");
