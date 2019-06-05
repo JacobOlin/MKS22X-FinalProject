@@ -4,21 +4,50 @@ Dev Log:
 
 5/20/19:
   Jacob- Started to work on allowing the player to move around. Also added a cool down on move so            that the player doesn't move too quickly. Also created the class walls. They show up but don't do anything.
+  Cody - Added the Fighttable interface and the basses for the Enemy classes
   
 5/21/19:
   Jacob- Created the interface fightable so that we can later loop through a list of fightables and have each one attack. Also created a pseudo-attack for the hero based on the direction they were last moving. It only creates a red space but it's in the direction that is most logical.
+  Cody - Worked on the Fireball class
   
 5/22/19:
   Jacob- Worked on the map so that the player can now enter different rooms. Each room can have a different amount of walls in various places. Also did a quality of life update by making the player move more smoothly.
   
 5/23/19:
   Jacob- Today I basically worked on creating the entire map. You can now smoothly move to any part of the map and the walls prevent you from doing anything you wouldn't normally be able to do.
+  Cody - Gave Enemies x and y values and was proprely able to display them using a rectange(temporaray)
   
 5/24/19:
   Jacob- Started working on making the Movable walls for the two locations in the map where you can actually push walls. The walls are giving me a bit of trouble but you can get the wall to move, it just doesn't look like it has moved.
   
 5/28/19:
   Jacob- Today I got the movable walls to sort of work. You can push them but their movement is very clunky and they can be pushed into other walls.
+  Cody - Changed the Hero class to be more intuative to use. Created the attack method for Hero which allowed you to attack. Created the Enemies array list to populate the Enemies. Created a way for Enemies to die, being removed from the list.
   
 5/29/19:
   Jacob- I got the movable walls to work a lot nicer. They move really smoothly, they can no longer be pushed into other walls, and will act like regular walls when they're pushed up against other walls. The movable walls also reset when you exit and re-enter the room.
+  Cody - Attack and dealDamage now works in every direction. Enemies now move around randomly.
+  
+5/30/19:
+  Jacob-
+  Cody- Spent 40 minutes and probably 40000 brain cells trying to merge two branches, was succesful in the end. Messed around with the numbers for enemies moving to be more reasonsable
+  
+5/31/19:
+  Jacob-
+  Cody- Enemies now don't walk through walls
+
+6/1/19:
+  Jacob-
+  Cody- Gave images to display the Enemies instead of the rectangles
+
+6/2/19:
+  Jacob-
+  Cody- Enemies now attack Link when he gets close. Fireballs now fly around, and dissapear after a certain amount of time. They also dissapear and deal damage to Link if they collide with him. Aquamentus now fires 3 fireballs as his attack along with the regular attack.
+
+6/3/19:
+  Jacob-
+  Cody- Added a Gameover screen, but if you press x on this screen you respawn
+  
+6/4/19:
+  Jacob-
+  Cody- Added the bow for Link. Added the Arrows class, which functions the same as fireballs, but instead colides with Enemies. Added a text display for Link's Arrows and Health
