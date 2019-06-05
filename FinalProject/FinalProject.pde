@@ -165,6 +165,10 @@ void draw() {
 void die() {
   for ( int i = 0; i < Enemies.size(); i++) {
     if (Enemies.get(i).die()) {
+      if (keyList[roomY*6+roomX] > 0) {
+        keyList[roomY*6+roomX] -= 1;
+        dropKey(Enemies.get(i).x,Enemies.get(i).y);
+      }
       Enemies.remove(i);
       i--;
     }
@@ -306,4 +310,8 @@ public class LockedDoor {
     fill(127, 0, 127);
     rect(48*x+24, 48*y+24, 48, 48);
   }
+}
+
+public void dropKey(int xcor,int ycor) {
+  
 }
