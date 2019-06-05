@@ -455,7 +455,7 @@ public class Arrow{
     this.y =y;
     this.xspeed = xspeed;
     this.yspeed = yspeed;
-    time = 30;
+    time = 60;
     size = 20;
     this.image = image;
   }
