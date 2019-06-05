@@ -16,7 +16,8 @@ ArrayList<LockedDoor> ListOfDoors;
 ArrayList<ArrayList<ArrayList<Wall>>> ListOfRooms;
 ArrayList<MovableWall> ListOfMovableWalls;
 PImage tile,movablewall;
-int[] keyList = {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0};
+int[] keyList = {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0};
+key curr;
 
 
 int[][] WallsInput = {{}, 
@@ -144,6 +145,13 @@ void draw() {
       movingWall.changeYCor(movingWall.slowMoveY);
       if (movingWall.coolDown == 0) {
         movingWall = null;
+      }
+    }
+    if (curr != null) {
+      curr.display();
+      if (abs(curr.x - hero.x) < 36 && abs(curr.y - hero.y) < 36) {
+        curr = null;
+        hero.keys += 1;
       }
     }
     fill(0, 0, 0);
@@ -313,5 +321,18 @@ public class LockedDoor {
 }
 
 public void dropKey(int xcor,int ycor) {
+  curr = new key(xcor,ycor);
+}
+
+public class key {
+  int x,y;
+  public key(int xcor,int ycor) {
+    x = xcor;
+    y = ycor;
+  }
   
+  public void display() {
+    fill(255,255,0);
+    rect(x,y,24,24);
+  }
 }
