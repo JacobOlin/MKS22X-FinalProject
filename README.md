@@ -3,7 +3,7 @@
 Dev Log:
 
 5/20/19:
-  Jacob- Started to work on allowing the player to move around. Also added a cool down on move so            that the player doesn't move too quickly. Also created the class walls. They show up but don't do anything.
+  Jacob- Started to work on allowing the player to move around. Also added a cool down on move so that the player doesn't move too quickly. Also created the class walls. They show up but don't do anything.<br/>
   Cody - Added the Fighttable interface and the basses for the Enemy classes
   
 5/21/19:
