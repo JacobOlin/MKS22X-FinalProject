@@ -83,7 +83,7 @@ public class Hero implements Fightable{
 
   void move() {
     if (keyPressed && coolDown == 0) {
-      if ((key == 'W' || key == 'w') && y - Imgh/2 > 0) {
+      if ((key == 'W' || key == 'w') && y - Imgh/2 > 48) {
         direction = 'u';
         boolean canMove = true;
         for (Wall w : ListOfWalls) {
@@ -125,10 +125,10 @@ public class Hero implements Fightable{
           coolDown = 8;
         }
       }
-      if ((key == 'W' || key == 'w') && y - Imgh/2 == 0) {
+      if ((key == 'W' || key == 'w') && y - Imgh/2 <= 48) {
         direction = 'u';
         roomY -= 1;
-        y = height - 24;
+        y = height - 72;
         coolDown = 8;
         slowMoveX = 0;
         slowMoveY = 0;
@@ -137,7 +137,7 @@ public class Hero implements Fightable{
           ListOfMovableWalls.add(new MovableWall(MovableWallsInput[roomY*6+roomX][0], MovableWallsInput[roomY*6+roomX][1]));
         }
       }
-      if ((key == 'A' || key == 'a') && x - Imgw/2 > 0) {
+      if ((key == 'A' || key == 'a') && x - Imgw/2 > 48) {
         direction = 'l';
         boolean canMove = true;
         for (Wall w : ListOfWalls) {
@@ -175,10 +175,10 @@ public class Hero implements Fightable{
           coolDown = 8;
         }
       }
-      if ((key == 'A' || key == 'a') && x - Imgw/2 == 0) {
+      if ((key == 'A' || key == 'a') && x - Imgw/2 <= 48) {
         direction = 'l';
         roomX -= 1;
-        x = width - 24;
+        x = width - 72;
         coolDown = 8;
         slowMoveX = 0;
         slowMoveY = 0;
@@ -187,7 +187,7 @@ public class Hero implements Fightable{
           ListOfMovableWalls.add(new MovableWall(MovableWallsInput[roomY*6+roomX][0], MovableWallsInput[roomY*6+roomX][1]));
         }
       }
-      if ((key == 'S' || key == 's') && y + Imgh/2 < height) {
+      if ((key == 'S' || key == 's') && y + Imgh/2 < height - 48) {
         direction  = 'd';
         boolean canMove = true;
         for (Wall w : ListOfWalls) {
@@ -225,10 +225,10 @@ public class Hero implements Fightable{
           coolDown = 8;
         }
       }
-      if ((key == 'S' || key == 's') && y + Imgh/2 == height) {
+      if ((key == 'S' || key == 's') && y + Imgh/2 >= height - 48) {
         direction = 'd';
         roomY += 1;
-        y = 24;
+        y = 72;
         coolDown = 8;
         slowMoveX = 0;
         slowMoveY = 0;
@@ -237,7 +237,7 @@ public class Hero implements Fightable{
           ListOfMovableWalls.add(new MovableWall(MovableWallsInput[roomY*6+roomX][0], MovableWallsInput[roomY*6+roomX][1]));
         }
       }
-      if ((key == 'D' || key == 'd') && x + Imgw/2 < width) {
+      if ((key == 'D' || key == 'd') && x + Imgw/2 < width - 48) {
         direction = 'r';
         boolean canMove = true;
         for (Wall w : ListOfWalls) {
@@ -275,10 +275,10 @@ public class Hero implements Fightable{
           coolDown = 8;
         }
       }
-      if ((key == 'D' || key == 'd') && x + Imgh/2 == width) {
+      if ((key == 'D' || key == 'd') && x + Imgh/2 >= width - 48) {
         direction = 'r';
         roomX += 1;
-        x = 24;
+        x = 72;
         coolDown = 8;
         slowMoveX = 0;
         slowMoveY = 0;
