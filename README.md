@@ -54,4 +54,4 @@ For our Final Project, we recreated the first dungeon from the game, The Legend 
   
 6/4/19:<br/>
   Jacob-<br/>
-  Cody- Added the bow for Link. Added the Arrows class, which functions the same as fireballs, but instead colides with Enemies. Added a text display for Link's Arrows and Health
+  Cody- Added the bow for Link. Added the Arrows class, which functions the same as fireballs, but instead colides with Enemies. Added a text display for Link's Arrows and Health. Added a fucntion to change the Enemies for the different rooms.
