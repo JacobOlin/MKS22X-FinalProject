@@ -33,25 +33,23 @@ For our Final Project, we recreated the first dungeon from the game, The Legend 
   Cody - Attack and dealDamage now works in every direction. Enemies now move around randomly.
   
 5/30/19:<br/>
-  Jacob-<br/>
+  Jacob-Updated the devLog today.<br/>
   Cody- Spent 40 minutes and probably 40000 brain cells trying to merge two branches, was succesful in the end. Messed around with the numbers for enemies moving to be more reasonsable
   
 5/31/19:
-  Jacob-<br/>
+  Jacob-I started working on the locked doors today, but I wasn't able to finish because I need some stuff from enemies.<br/>
   Cody- Enemies now don't walk through walls
 
 6/1/19:<br/>
-  Jacob-<br/>
   Cody- Gave images to display the Enemies instead of the rectangles
 
 6/2/19:<br/>
-  Jacob-<br/>
   Cody- Enemies now attack Link when he gets close. Fireballs now fly around, and dissapear after a certain amount of time. They also dissapear and deal damage to Link if they collide with him. Aquamentus now fires 3 fireballs as his attack along with the regular attack.
 
 6/3/19:<br/>
-  Jacob-<br/>
+  Jacob- I finished the locked doors today.<br/>
   Cody- Added a Gameover screen, but if you press x on this screen you respawn
   
 6/4/19:<br/>
-  Jacob-<br/>
+  Jacob- Finished up a lot of last minute stuff. I created keys, which are dropped by enemies and allow you to open doors, made it so that you can only get the bow at a certain point, and made a definitive end to the game.<br/>
   Cody- Added the bow for Link. Added the Arrows class, which functions the same as fireballs, but instead colides with Enemies. Added a text display for Link's Arrows and Health. Added a fucntion to change the Enemies for the different rooms.
