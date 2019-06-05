@@ -11,6 +11,7 @@ PImage gameover;
 PImage bricks;
 PImage bowImage;
 PImage triforceImage;
+PImage victory;
 MovableWall movingWall;
 PImage[][] backgrounds = new PImage[6][6];
 ArrayList<ArrayList<ArrayList<LockedDoor>>> ListOfDoorsRooms;
@@ -21,7 +22,9 @@ PImage tile,movablewall;
 int[] keyList = {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0};
 key curr;
 Bow bow = new Bow();
+Triforce triforce = new Triforce();
 boolean canShoot = false;
+boolean won = false;
 
 
 int[][] WallsInput = {{}, 
@@ -73,6 +76,8 @@ void setup() {
   gameover = loadImage("gameover.png");
   bricks = loadImage("bricks.png");
   bowImage = loadImage("bow.png");
+  triforceImage = loadImage("triforce.png");
+  victory = loadImage("VictoryScreen.png");
   hero = new Hero(48, 48, width/2 + 24, height - 72);
   coolDown = 0;
   ListOfWalls = new ArrayList<Wall>();
@@ -110,8 +115,12 @@ void setup() {
 }
 
 void draw() {
-  if ( hero.hp <= 0) {
-    image(gameover, 0, 0, width, height);
+  if ( hero.hp <= 0 || won) {
+    if (won) {
+      image(victory,0,0,width,height);
+    }else {
+      image(gameover, 0, 0, width, height);
+    }
     if (key == 'X' || key == 'x') {
       setup();
       changeEnemies();
@@ -166,6 +175,13 @@ void draw() {
         bow = null;
       }
     }
+    if (roomY == 1 && roomX == 5) {
+      triforce.display();
+      if (abs(hero.x - 8*48) <= 24 && abs(hero.y - 5*48) <= 24) {
+        won = true;
+      }
+    }
+      
     fill(0, 0, 0);
     textSize(25);
     text("Arrows : " + hero.arrows, 30, 30);
@@ -372,7 +388,7 @@ public class Triforce {
   int y;
   
   public Triforce() {
-    x = 7*48 + 24;
+    x = 8*48;
     y = 5*48;
   }
   
