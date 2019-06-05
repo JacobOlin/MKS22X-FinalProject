@@ -9,6 +9,7 @@ int roomX = 2;
 int roomY = 5;
 PImage gameover; 
 PImage bricks;
+PImage bowImage;
 MovableWall movingWall;
 PImage[][] backgrounds = new PImage[6][6];
 ArrayList<ArrayList<ArrayList<LockedDoor>>> ListOfDoorsRooms;
@@ -18,6 +19,8 @@ ArrayList<MovableWall> ListOfMovableWalls;
 PImage tile,movablewall;
 int[] keyList = {0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0};
 key curr;
+Bow bow = new Bow();
+boolean canShoot = false;
 
 
 int[][] WallsInput = {{}, 
@@ -68,6 +71,7 @@ void setup() {
   movablewall = loadImage("movableWall.png");
   gameover = loadImage("gameover.png");
   bricks = loadImage("bricks.png");
+  bowImage = loadImage("bow.png");
   hero = new Hero(48, 48, width/2 + 24, height - 72);
   coolDown = 0;
   ListOfWalls = new ArrayList<Wall>();
@@ -154,6 +158,13 @@ void draw() {
         hero.keys += 1;
       }
     }
+    if (roomY == 0 && roomX == 1 && bow != null) {
+      bow.display();
+      if (abs(hero.x - 9*48) <= 24 && abs(hero.y - 5*48) <= 24) {
+        canShoot = true;
+        bow = null;
+      }
+    }
     fill(0, 0, 0);
     textSize(25);
     text("Arrows : " + hero.arrows, 30, 30);
@@ -161,7 +172,9 @@ void draw() {
     text("Keys : " + hero.keys,30,80);
     hero.move();
     hero.attack();
-    hero.bow();
+    if (canShoot) {
+      hero.bow();
+    }
     hero.display();
     showEnemies(); // displays all the Enemies
     die();         // checks the list of enemies and removes them if they need to die
@@ -337,5 +350,18 @@ public class key {
   public void display() {
     fill(255,255,0);
     rect(x,y,24,24);
+  }
+}
+
+public class Bow {
+  int x;
+  int y;
+  
+  public Bow() {
+    x = 8*48;
+    y = 5*48;
+  }
+  public void display() {
+    image(bowImage,x,y,48,48);
   }
 }

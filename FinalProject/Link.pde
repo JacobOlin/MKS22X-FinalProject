@@ -3,6 +3,7 @@ public class Hero implements Fightable{
   int imgxchange,imgychange;
   char direction;
   PImage right,rightAttack,left,leftAttack,up,upAttack,down,downAttack,current;
+  boolean canShoot;
   Hero(int he,int wi,int startx,int starty) {
     Imgh = he;
     Imgw = wi;
