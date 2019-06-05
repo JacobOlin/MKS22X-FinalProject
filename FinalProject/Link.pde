@@ -1,5 +1,5 @@
 public class Hero implements Fightable{
-  int Imgh,Imgw,x,y,hp,dmg,slowMoveX,slowMoveY,arrows;
+  int Imgh,Imgw,x,y,hp,dmg,slowMoveX,slowMoveY,arrows,keys;
   char direction;
   Hero(int he,int wi,int startx,int starty) {
     Imgh = he;
@@ -10,6 +10,7 @@ public class Hero implements Fightable{
     dmg = 2;
     direction = 'd';
     arrows = 20;
+    keys = 0;
   }
   
   void display() {
@@ -331,26 +332,38 @@ public class Hero implements Fightable{
 
       if (direction == 'd') {
         if (x/48 == d.x && y/48 + 1 == d.y) {
-          d.unlock();
+          if (keys > 0) {
+            d.unlock();
+            keys -= 1;
+          }
         }
       }
 
       if ( direction == 'u') {
         if (x/48 == d.x && y/48 - 1 == d.y)
         {
-          d.unlock();
+          if (keys > 0) {
+            d.unlock();
+            keys -= 1;
+          }
         }
       }
 
       if ( direction == 'l') {
         if (x/48 - 1 == d.x && y/48 == d.y) {
-          d.unlock();
+          if (keys > 0) {
+            keys -= 1;
+            d.unlock();
+          }
         }
       }
 
       if ( direction == 'r') {
         if (x/48 + 1 == d.x && y/48 == d.y) {
-          d.unlock();
+          if (keys > 0) {
+            d.unlock();
+            keys -= 1;
+          }
         }
       }
     }
