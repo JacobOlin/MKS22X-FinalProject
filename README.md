@@ -6,7 +6,7 @@ For our Final Project, we recreated the first dungeon from the game, The Legend 
 
 Use the WASD keys to move.
 Use X to attack with the sword.
-Use C to attack with the bow(when aquired).
+Use C to attack with the bow (when acquired).
 
 ## Dev Log
 
